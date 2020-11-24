@@ -12,9 +12,9 @@ background-color:#FBF6F6;
   }
   .logo{
     margin:10px;
-    width:30%;
-    height:30%;
-    margin-left:10%;
+    width:20%;
+    height:20%;
+    margin-left:5%;
   }
 `;
 
