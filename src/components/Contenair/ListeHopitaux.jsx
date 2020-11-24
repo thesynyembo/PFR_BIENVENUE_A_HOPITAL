@@ -27,9 +27,6 @@ h5{
 .icone{
  color:red;
 }
-.pagination{
-  margin-left:10%;
-}
 `;
 export default function ListeHopitaux() {
   const [listeHopital, setListeHopital] = useState([]);
@@ -67,7 +64,7 @@ export default function ListeHopitaux() {
                   {e.adress}
                 </Feed.Date>
             <Link to="/DetailListe">
-              <Button inverted color='red'  className="ButtonIcon" >Plus d'infos</Button>
+              <Button inverted color='red'  className="ButtonIcon" ><i class="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button>
             </Link>
             </p>
             </Grid.Column>
@@ -92,7 +89,7 @@ export default function ListeHopitaux() {
                   {e.adress}
                 </Feed.Date>
             <Link to="/DetailListe">
-              <Button inverted color='red'  className="ButtonIcon" >Plus d'infos</Button>
+              <Button inverted color='red'  className="ButtonIcon" ><i class="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button>
             </Link>
             </p>
             </Grid.Column>
@@ -117,7 +114,7 @@ export default function ListeHopitaux() {
                   {e.adress}
                 </Feed.Date>
             <Link to="/DetailListe">
-              <Button inverted color='red'  className="ButtonIcon" >Plus d'infos</Button>
+              <Button inverted color='red'  className="ButtonIcon" ><i class="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button>
             </Link>
             </p>
             </Grid.Column>
@@ -142,7 +139,7 @@ export default function ListeHopitaux() {
                   {e.adress}
                 </Feed.Date>
             <Link to="/DetailListe">
-              <Button inverted color='red'  className="ButtonIcon" >Plus d'infos</Button>
+              <Button inverted color='red'  className="ButtonIcon" ><i class="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button>
             </Link>
             </p>
             </Grid.Column>
@@ -167,7 +164,7 @@ export default function ListeHopitaux() {
                   {e.adress}
                 </Feed.Date>
             <Link to="/DetailListe">
-              <Button inverted color='red'  className="ButtonIcon" >Plus d'infos</Button>
+              <Button inverted color='red'  className="ButtonIcon" ><i class="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button>
             </Link>
             </p>
             </Grid.Column>
