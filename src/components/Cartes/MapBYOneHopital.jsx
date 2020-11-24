@@ -18,7 +18,7 @@ export default function Map() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/Map`)
+      .get(`http://localhost:5000/Map`)
       .then((res) => {
         setDataHopital(res.data);
         console.log(res.data);

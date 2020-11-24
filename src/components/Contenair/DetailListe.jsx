@@ -32,7 +32,7 @@ export default function DetailListe() {
   const [listeSpecialite, setListeSpecialite] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/Map`)
+      .get(`http://localhost:5000/Map`)
       .then((res) => {
         setListeHopital(res.data);
         console.log('DetailListe',res.data);
@@ -41,7 +41,7 @@ export default function DetailListe() {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://localhost:4000/Specialite`)
+      .get(`http://localhost:5000/Specialite`)
       .then((res) => {
         setListeSpecialite(res.data);
         console.log('listeSpecialite',res.data);
