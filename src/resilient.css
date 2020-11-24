@@ -1,0 +1,17 @@
+/*Présentation de la solution */
+.elementor-field-type-textarea.elementor-field-group.elementor-column.elementor-field-group-presentation.elementor-col-100.elementor-field-required.elementor-mark-required {
+  display: none;
+}
+
+/*Prix et distinction */
+.elementor-field-type-textarea.elementor-field-group.elementor-column.elementor-field-group-field_6e081ea.elementor-col-100 {
+  display: none;
+}
+
+/*Structure d'accompagnement */
+.elementor-field-type-radio.elementor-field-group.elementor-column.elementor-field-group-field_8c32652.elementor-col-100 {
+  display: none;
+}
+.elementor-field-type-textarea.elementor-field-group.elementor-column.elementor-field-group-field_38f20c9.elementor-col-100 {
+  display: none;
+}

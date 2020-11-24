@@ -1,0 +1,255 @@
+date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+date = new Date("2020-08-27T14:59:14")
+      <div style={myStyle} onClick={visible=false}>X</div>
+
+<DivDetail>
+    <Card className="carte">
+    <Card.Content>
+      <Feed>
+        <Feed.Event>
+          <Feed.Label image={logos} className="img" style={{width:"10%"}}/>
+          <Feed.Content>
+            <Feed.Date content='4 days ago' />
+            <Feed.Summary>
+              You added <a>Elliot Baker</a> to your <a>musicians</a> group.
+            </Feed.Summary>
+            <Feed.Summary>
+              You added <a>Elliot Baker</a> to your <a>musicians</a> group.
+            </Feed.Summary>
+            <Feed.Summary>
+              You added <a>Elliot Baker</a> to your <a>musicians</a> group.
+            </Feed.Summary>
+          </Feed.Content>
+        </Feed.Event>
+      <Bouton/>
+      </Feed>
+    </Card.Content>
+  </Card>  
+    </DivDetail>
+    
+        map.on("load", function () {
+      map.addSource("hopital", formatGeoJson(data));
+      // Add a layer showing the places.
+      map.addLayer({
+        id: "hopital",
+        type: "symbol",
+        source: "hopital",
+        layout: {
+          "icon-image": "town-hall-15",
+          "icon-allow-overlap": true,
+        },
+      });
+    });  
+
+
+
+
+    import React from "react";
+import { Card } from "react-bootstrap";
+import styled from "styled-components";
+import logo from "../Img/logoBAH.png"
+
+const Div = styled.div`
+.ContainerCarte {
+    width: 30%;
+    position: absolute;
+    top: 90px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 3;
+    border: 1px solid #FFF;
+
+  }
+`;
+
+const DivX = styled.div`{
+    height:30px;
+    width:30px;
+    border:1px solid #cccccc;
+    border-radius:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:red;
+    cursor:pointer;
+    font-weight:300px;
+    font-size:15px;
+    position:absolute;
+    top:2px;
+    z-index:3;
+    right:0;
+    background:rgba(255,255,255, 0.9);
+}`;
+export default function formatDataHopital({ structure , visible }) {
+  return (
+    <Div>
+    {
+      (visible)?
+    <div className="ContainerCarte">
+    <Card>
+    <DivX onClick={visible=false}>X</DivX>
+      <div className="embed-responsive embed-responsive-16by9" style={{border:"1px solid #cccccc"}}>
+        <img
+          class="card-img-top embed-responsive-item"
+          src={
+            structure.image !== 'null' 
+              ? structure.image
+              : {logo}
+          }
+          alt=""
+        />
+      </div> 
+      <Card.Body  style={{padding:"0 50px"}}>
+        <Card.Title style={{fontWeight:"400"}} className="text-center">Nom hôpital</Card.Title>
+        <Card.Text style={{fontWeight:"300"}} className="text-center">{structure.name}</Card.Text>
+        <div className="text-center">
+        </div>   
+        <Card.Title style={{fontWeight:"400"}}>Téléphone</Card.Title>
+        <Card.Text style={{fontWeight:"300"}} >{structure.phone}</Card.Text>
+        <Card.Title style={{fontWeight:"400"}}>Adresse</Card.Title>
+        <Card.Text  style={{fontWeight:"300"}}>{structure.adress}</Card.Text>
+        
+      </Card.Body>
+    </Card>
+  </div>:""}
+
+    </Div>
+  );
+}
+
+
+
+              <p>
+                <span class="text-muted small">Auteur de la citation</span>
+                <span>{{pub.auteur_de_la_citation}}</span>
+              </p>
+              <p>
+                <span class="text-muted small">Citation</span>
+                <span>{{pub.la_citation}}</span>
+              </p>
+              <p>
+                <span class="text-muted small">Problème</span>
+                <span  v-html="pub.acf.le_probleme></span>
+              </p>
+              <p>
+                <span class="text-muted small">Acteur</span>
+                <span  v-html="pub.acf.les_acteurs"></span>
+              </p>
+
+
+
+
+
+
+
+
+
+
+import mapboxgl from "mapbox-gl";
+import styled from "styled-components";
+import React, { useState, useEffect } from "react";
+import {formatHopital, formatSpecialite} from "../../services/api/helper";
+
+const DivMap = styled.div`
+  width: 100%;
+`;
+
+export default function Map() {
+
+  mapboxgl.accessToken =
+    "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
+  const [mapRef, setMapRef] = useState(React.createRef());
+
+  const [dataHopital, setDataHopital] = useState([]);
+ 
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/Map`)
+      .then((res) => {
+        setDataHopital(res.data);
+        console.log(res.data);
+        createMap(mapRef, formatHopital(res.data), formatSpecialite(res.data));
+        // createMap(mapref)
+      })
+      .catch((erreur) => console.log(erreur));
+  }, []);
+  
+  function createMap(mapRef, data) {
+    const map = new mapboxgl.Map({
+      container: mapRef.current,
+      style: "mapbox://styles/mapbox/streets-v11",
+      center: [15.322222, -4.325],
+      zoom: 11,
+    });
+    const customData = formatDataHopital(data);    
+
+    map.on("load", function () {
+      map.addSource("hopital", formatGeoJson(data));
+      // Ajoutez un calque montrant les lieux.
+      map.addLayer({
+        id: "hopital",
+        type: "symbol",
+        source: "hopital",
+        layout: {
+          "icon-image": "town-hall-15",
+          "icon-allow-overlap": true,
+        },
+      });
+    });
+
+
+ 
+    // Remplacez le curseur par un pointeur lorsque la souris survole le calque des lieux.
+    map.on("mouseenter", "places", function () {
+      map.getCanvas().style.cursor = "pointer";
+    });
+    // Remplacez-le par un pointeur lorsqu'il quitte.
+    map.on("mouseleave", "places", function () {
+      map.getCanvas().style.cursor = "";
+    });
+    
+  } 
+
+  
+   function formatDataHopital(data) {
+    const dataFormated = {
+      features: [],
+    };
+    for (const element of data) {
+      dataFormated.features.push({
+        type: "Feature",
+        properties: element,
+        geometry: {
+          coordinates: [element.longitude, element.latitude],
+          type: "Point",
+        },
+      });
+    }    return dataFormated;
+  }
+
+
+  function formatGeoJson(data) {
+    return {
+      type: "geojson",
+      data: {
+        type: "FeatureCollection",
+        features: formatDataHopital(data)['features'],
+      },
+    };
+  }
+
+  return (
+    <>
+      <DivMap style={{ height: ""}}>
+        <div className="map-container" ref={mapRef} />
+      </DivMap>
+   </>
+  );
+}
+
+.mapboxgl-ctrl.mapboxgl-ctrl-attrib {
+    padding: 0 5px;
+    background-color: hsla(0,0%,100%,.5);
+    margin: 0;
+    display: none;
+}
