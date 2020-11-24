@@ -4,10 +4,7 @@ import { Feed, Card, Grid, Icon, Button, Pagination } from 'semantic-ui-react'
 import styled from "styled-components"
 import logo from "../Img/ngaliema.jpg"
 import { Link } from "react-router-dom"
-import Header2 from "../Nav/Header2"
-import SimpleBarReact from "simplebar-react";
-import "simplebar/src/simplebar.css";
-import ReactScrollbar from 'react-scrollbar-js';
+import CustomScroll from 'react-customscroll';
 
 
 const Div = styled.div`
@@ -51,20 +48,21 @@ export default function ListeHopitaux() {
   <>
     <Div>
       <h2>Liste des hôpitaux</h2>
-      <ReactScrollbar>
+      <div style={{height: '450px', overflow: 'hidden',Color:'red'}}>
+      <CustomScroll>
       <Card className="carte">
         {
       listeHopital.map((e)=>
         <Card.Content>
           <Grid>
-            <Grid.Column mobile={6} tablet={6} computer={6} className="DivBar">
+            <Grid.Column mobile={5} tablet={5} computer={5} className="DivBar">
               <Feed.Extra images>          
                 <img src={logo} style={{height:"100px",width:"100px"}} />          
               </Feed.Extra>
             </Grid.Column>
-            <Grid.Column mobile={10} tablet={10} computer={10}>
-                <h4>{e.name}</h4>
-                <p style={{marginLeft:'5%'}}>
+            <Grid.Column mobile={11} tablet={11} computer={11}>
+                <h4 style={{marginLeft:'30%'}}>{e.name}</h4>
+                <p style={{marginLeft:'30%'}}>
                 <Feed.Date>              
                   {e.adress}
                 </Feed.Date>
@@ -82,14 +80,14 @@ export default function ListeHopitaux() {
       listeHopital.map((e)=>
         <Card.Content>
           <Grid>
-            <Grid.Column mobile={6} tablet={6} computer={6} className="DivBar">
+            <Grid.Column mobile={5} tablet={5} computer={5} className="DivBar">
               <Feed.Extra images>          
                 <img src={logo} style={{height:"100px",width:"100px"}} />          
               </Feed.Extra>
             </Grid.Column>
-            <Grid.Column mobile={10} tablet={10} computer={10}>
-              <h4>{e.name}</h4>
-              <p style={{marginLeft:'5%'}}>
+            <Grid.Column mobile={11} tablet={11} computer={11}>
+                <h4 style={{marginLeft:'30%'}}>{e.name}</h4>
+                <p style={{marginLeft:'30%'}}>
                 <Feed.Date>              
                   {e.adress}
                 </Feed.Date>
@@ -107,14 +105,14 @@ export default function ListeHopitaux() {
       listeHopital.map((e)=>
         <Card.Content>
           <Grid>
-            <Grid.Column mobile={6} tablet={6} computer={6} className="DivBar">
+            <Grid.Column mobile={5} tablet={5} computer={5} className="DivBar">
               <Feed.Extra images>          
                 <img src={logo} style={{height:"100px",width:"100px"}} />          
               </Feed.Extra>
             </Grid.Column>
-            <Grid.Column mobile={10} tablet={10} computer={10}>
-              <h4>{e.name}</h4>
-              <p style={{marginLeft:'5%'}}>
+            <Grid.Column mobile={11} tablet={11} computer={11}>
+                <h4 style={{marginLeft:'30%'}}>{e.name}</h4>
+                <p style={{marginLeft:'30%'}}>
                 <Feed.Date>              
                   {e.adress}
                 </Feed.Date>
@@ -127,7 +125,58 @@ export default function ListeHopitaux() {
         </Card.Content>
       )}
       </Card>
-      </ReactScrollbar>
+      <Card className="carte">
+        {
+      listeHopital.map((e)=>
+        <Card.Content>
+          <Grid>
+            <Grid.Column mobile={5} tablet={5} computer={5} className="DivBar">
+              <Feed.Extra images>          
+                <img src={logo} style={{height:"100px",width:"100px"}} />          
+              </Feed.Extra>
+            </Grid.Column>
+            <Grid.Column mobile={11} tablet={11} computer={11}>
+                <h4 style={{marginLeft:'30%'}}>{e.name}</h4>
+                <p style={{marginLeft:'30%'}}>
+                <Feed.Date>              
+                  {e.adress}
+                </Feed.Date>
+            <Link to="/DetailListe">
+              <Button inverted color='red'  className="ButtonIcon" >Plus d'infos</Button>
+            </Link>
+            </p>
+            </Grid.Column>
+          </Grid>
+        </Card.Content>
+      )}
+      </Card>
+      <Card className="carte">
+        {
+      listeHopital.map((e)=>
+        <Card.Content>
+          <Grid>
+            <Grid.Column mobile={5} tablet={5} computer={5} className="DivBar">
+              <Feed.Extra images>          
+                <img src={logo} style={{height:"100px",width:"100px"}} />          
+              </Feed.Extra>
+            </Grid.Column>
+            <Grid.Column mobile={11} tablet={11} computer={11}>
+                <h4 style={{marginLeft:'30%'}}>{e.name}</h4>
+                <p style={{marginLeft:'30%'}}>
+                <Feed.Date>              
+                  {e.adress}
+                </Feed.Date>
+            <Link to="/DetailListe">
+              <Button inverted color='red'  className="ButtonIcon" >Plus d'infos</Button>
+            </Link>
+            </p>
+            </Grid.Column>
+          </Grid>
+        </Card.Content>
+      )}
+      </Card>
+      </CustomScroll>
+      </div>
     </Div>
 
   </>
