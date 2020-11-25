@@ -6,7 +6,7 @@ import {
   Route,
   Switch
 } from "react-router-dom"
-import ListeHopitaux from "./components/Contenair/ListeHopitaux"
+// import ListeHopitaux from "./components/Contenair/ListeHopitaux"
 import DetailListe from "./components/Contenair/DetailListe"
 
 
@@ -19,9 +19,9 @@ function App() {
    <Route exact path="/">
     <MapHopital/>
    </Route>
-   <Route path="/DetailList">
+   {/* <Route path="/DetailList">
     <ListeHopitaux/>
-   </Route>
+   </Route> */}
    <Route path="/DetailListe">
     <DetailListe/>
    </Route>

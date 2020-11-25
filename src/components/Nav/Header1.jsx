@@ -26,7 +26,9 @@ const Header = () => (
             <i class="fad fa-angle-double-left icone" style={{fontSize:"3em"}}></i>
           </Link>
         <div className="logo">
-          <Image src={logo} alt=''/>
+          <Link to='/'>
+            <Image src={logo} alt=''/>
+          </Link>
         </div>
       </Grid.Column>
     </Grid>

@@ -5,6 +5,9 @@ import React, { useState, useEffect } from "react";
 import {formatHopital, formatSpecialite} from "../../services/api/helper";
 
 const DivMap = styled.div`
+.map{
+height:200px;
+}
 `;
 
 export default function Map() {
@@ -50,7 +53,7 @@ export default function Map() {
   return (
     <>
       <DivMap style={{ height: ""}}>
-        <div className="map-container" ref={mapRef} />
+        <div className="map" ref={mapRef} />
       </DivMap>
    </>
   );

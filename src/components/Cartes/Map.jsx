@@ -5,7 +5,8 @@ import React, { useState, useEffect } from "react";
 import {formatHopital, formatSpecialite} from "../../services/api/helper";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import CardDetailHopital from '../Contenair/CardDetailHopital'
+import CardDetailHopital from '../Contenair/CardDetailHopital';
+import Loading from '../Contenair/loader'
 
 const DivMap = styled.div`
   width: 100%;
@@ -21,8 +22,8 @@ export default function Map() {
     name : '',
     description :''
   });
-
   const [dataHopital, setDataHopital] = useState([]);
+  const [load, setLoad] = useState(false);
  
 
   useEffect(() => {
@@ -32,6 +33,7 @@ export default function Map() {
         setDataHopital(res.data);
         console.log(res.data);
         createMap(mapRef, formatHopital(res.data), formatSpecialite(res.data));
+        setLoad(true);
         // createMap(mapref)
       })
       .catch((erreur) => console.log(erreur));
@@ -40,7 +42,7 @@ export default function Map() {
   function createMap(mapRef, data) {
     const map = new mapboxgl.Map({
       container: mapRef.current,
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/thesy/ckh0h1vl90z5o19nm3a9wq4fe/draft",
       center: [15.322222, -4.325],
       zoom: 11,
     });
@@ -87,12 +89,12 @@ export default function Map() {
       })
     );  
     map.on("load", function () {
-      map.addSource("hopital", formatGeoJson(data));
+      map.addSource("states", formatGeoJson(data));
       // Ajoutez un calque montrant les lieux.
       map.addLayer({
-        id: "hopital",
+        id: "states",
         type: "symbol",
-        source: "hopital",
+        source: "states",
         layout: {
           "icon-image": "town-hall-15",
           "icon-allow-overlap": true,
@@ -102,7 +104,7 @@ export default function Map() {
     
         // Lorsqu'un événement de clic se produit sur une entité dans la couche des lieux, ouvrez une fenêtre contextuelle
     // l'emplacement de la fonctionnalité, avec la description HTML de ses propriétés.
-    map.on("click", "hopital", function (e) {
+    map.on("click", "states", function (e) {
       setselectHopital(e.features[0].properties)
       setdisplayDetailHopital(true)
       localStorage.setItem("visible","1")
@@ -148,13 +150,13 @@ export default function Map() {
       },
     };
   }
-
   return (
     <>
       <DivMap style={{ height: ""}}>
-        <div className="map-container" ref={mapRef} />
+        <div className="map-container" ref={mapRef} />  
+          {displayDetailHopital ? <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital} /> : ""}
       </DivMap>
-      {displayDetailHopital ? <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital} /> : ""}
+      
     </>
   );
 }

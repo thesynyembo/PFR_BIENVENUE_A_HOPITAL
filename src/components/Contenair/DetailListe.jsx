@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react"
-import { Grid, Image, Icon} from 'semantic-ui-react'
+import { Grid, Image, Icon, GridColumn} from 'semantic-ui-react'
 import logo from '../Img/ngaliema.jpg'
 import styled from "styled-components"
 import Header from '../Nav/Header1'
@@ -8,6 +8,9 @@ import Footer from '../Footer/Footer'
 import Map from '../Cartes/MapBYOneHopital'
 
 const Div = styled.div`
+margin-top:5%;
+margin-left:10%;
+margin-right:10%;
   h5{
     font-family: "Mont Light";
   }
@@ -15,16 +18,14 @@ const Div = styled.div`
     font-family:"Mont Bold";
   }
   .iconE{
-    color:#009FE3;
+    color:#05F2DB;
     
   }
-`
-const DivColumn = styled.div`
-  padding-left:50px;
-`
-const DivColumns = styled.div`
-  padding-left:50px;
-  padding-top:700px;
+  .title{
+    background-color:#FF7777;
+    width:100%;
+    height:20%;
+  }
 `
 
 export default function DetailListe() {
@@ -51,56 +52,68 @@ export default function DetailListe() {
 
 return (
   <>
-<Div>
+    <Header/>
+    <Div>
   {
     listeHopital.map((e)=>
-  <Grid>
-    <Grid.Column mobile={16} tablet={16} computer={16}>
-      <Header/><br/>
-      <Grid.Column mobile={16} tablet={16} computer={16}>        
-        <Grid columns={2}>
-          <Grid.Column>
-            <DivColumn>
-              <Image src={logo} />
-            </DivColumn>
-          <Grid.Row columns={1}>
-            <Grid.Column ><br/>
-              <DivColumn> 
-                <h5><Icon name='map marker alternate' className="iconE"/>Adresse : {e.name}</h5>              
-                <h5><Icon name='map outline' className="iconE"/>Commune : {e.name}</h5>          
-                <h5><Icon name='phone' className="iconE"/>Gmail : {e.phone}</h5>
-                <h5><Icon name='info' className="iconE"/>Langue(s) :{e.email}</h5>
-                <h5><Icon name='clock outline' className="iconE"/>Heure : {e.email}</h5>
-                <h5><Icon name='info' className="iconE"/>{e.email}</h5>
-                  {
-                    listeSpecialite.map((e)=>
-                <h5>Spécialités:<ul><li>{e.name}</li></ul></h5>
+    
+      <Grid>
+        <Grid.Column mobile={16} tablet={16} computer={16}> 
+          <Grid columns={1} >             
+          <h2 className='title'>{e.name}</h2>
+          </Grid>
+        </Grid.Column>
+        <Grid.Column mobile={16} tablet={13} computer={13}>
+          <Grid columns={2}>
+            <Grid.Column>        
+              <Image src={logo} style={{ height: "150px", width:"350px"}}/>
+            </Grid.Column>
+            <Grid.Column>
+              <h5><Icon name='map marker alternate' className="iconE"/>Adresse : {e.name}</h5>              
+              <h5><Icon name='map outline' className="iconE"/>Commune : {e.name}</h5>          
+              <h5><Icon name='phone' className="iconE"/>Gmail : {e.phone}</h5>
+              <h5><Icon name='info' className="iconE"/>Langue(s) :{e.email}</h5>
+              <h5><Icon name='clock outline' className="iconE"/>Heure : {e.email}</h5>
+              <h5><Icon name='info' className="iconE"/>{e.email}</h5> 
+            </Grid.Column>
+          </Grid>
+        </Grid.Column>
+        <Grid.Column mobile={10} tablet={3} computer={3}> 
+          <Map/>           
+        </Grid.Column>
+        <Grid.Column mobile={16} tablet={16} computer={16}> 
+        <Grid columns={1} >
+            <h2 className='title'>Spécialités</h2>
+        </Grid>
+        <Grid columns={1}>
+          <Grid.Column> 
+              {
+                listeSpecialite.map((e)=>
+                  <h5><ul><li>{e.nom}</li></ul></h5>
                   )}
-              </DivColumn>
-            </Grid.Column>
-          </Grid.Row> 
-            </Grid.Column>
-              <Grid.Column>
-                  <Map/>
-              </Grid.Column>
-            </Grid>
-     
           </Grid.Column>
-        
-        
-        <DivColumn>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. 
-            Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae,
-             consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. 
-             Praesent blandit odio eu enim. Pellentesque sed dui ut augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et 
-             ultrices posuere cubilia Curae; Aliquam nibh. Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.</p>
-        </DivColumn>
-    </Grid.Column>
-    <Footer/>
-  </Grid>
-)}
-</Div>
-</>
-)
+        </Grid>
+        <Grid columns={1} >
+            <h2 className='title'>Direction de l'hôpital</h2>
+        </Grid>
+        <Grid columns={1}>
+          <Grid.Column> 
+              {
+                listeSpecialite.map((e)=>
+                <>
+                  <h5>{e.nom}</h5>
+                  <h5>{e.nom}</h5>
+                  <h5>{e.nom}</h5>
+                </>
+                  )}
+          </Grid.Column>
+        </Grid>
+        </Grid.Column>
+      </Grid>
+    )}
+        </Div><br/><br/><br/><br/><br/>
+        <Footer/>
 
+  </>
+  )
 }
