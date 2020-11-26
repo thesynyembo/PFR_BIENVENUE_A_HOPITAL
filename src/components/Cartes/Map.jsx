@@ -42,7 +42,7 @@ export default function Map() {
   function createMap(mapRef, data) {
     const map = new mapboxgl.Map({
       container: mapRef.current,
-      style: "mapbox://styles/thesy/ckh0h1vl90z5o19nm3a9wq4fe/draft",
+      style: "mapbox://styles/mapbox/streets-v11",
       center: [15.322222, -4.325],
       zoom: 11,
     });

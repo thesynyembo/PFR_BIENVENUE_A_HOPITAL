@@ -18,8 +18,6 @@ const DivColumns = styled.div`
   h6{
     margin-left:15%;
   }
-  
-
 `
 
 export default function Footer (){
@@ -36,9 +34,9 @@ export default function Footer (){
             </Grid.Column>
             <Grid.Column> 
               <ul>
-                <li><Icon name='facebook f' className='icone'/></li>
-                <li><Icon name='twitter' className='icone'/> </li>
-                <li><Icon name='linkedin' className='icone'/> </li>
+                <a href='' target="target"><li><Icon name='facebook f' className='icone'/></li></a>
+                <a href='' target="target"><li><Icon name='twitter' className='icone'/> </li></a>
+                <a href='' target="target"><li><Icon name='linkedin' className='icone'/> </li></a>
               </ul>
             </Grid.Column>
           </Grid>

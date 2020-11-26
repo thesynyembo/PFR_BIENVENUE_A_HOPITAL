@@ -17,9 +17,8 @@ margin-right:10%;
   p{
     font-family:"Mont Bold";
   }
-  .iconE{
-    color:#05F2DB;
-    
+  .icone{
+    color:#05F2DB;    
   }
   .title{
     background-color:#FF7777;
@@ -69,12 +68,12 @@ return (
               <Image src={logo} style={{ height: "150px", width:"350px"}}/>
             </Grid.Column>
             <Grid.Column>
-              <h5><Icon name='map marker alternate' className="iconE"/>Adresse : {e.name}</h5>              
-              <h5><Icon name='map outline' className="iconE"/>Commune : {e.name}</h5>          
-              <h5><Icon name='phone' className="iconE"/>Gmail : {e.phone}</h5>
-              <h5><Icon name='info' className="iconE"/>Langue(s) :{e.email}</h5>
-              <h5><Icon name='clock outline' className="iconE"/>Heure : {e.email}</h5>
-              <h5><Icon name='info' className="iconE"/>{e.email}</h5> 
+              <h5><Icon name='map marker alternate' className="icone"/>Adresse : {e.name}</h5>              
+              <h5><Icon name='map outline' className="icone"/>Commune : {e.name}</h5>          
+              <h5><Icon name='phone' className="icone"/>Gmail : {e.phone}</h5>
+              <h5><Icon name='info' className="icone"/>Langue(s) :{e.email}</h5>
+              <h5><Icon name='clock outline' className="icone"/>Heure : {e.email}</h5>
+              <h5><Icon name='info' className="icone"/>{e.email}</h5> 
             </Grid.Column>
           </Grid>
         </Grid.Column>
@@ -101,8 +100,8 @@ return (
               {
                 listeSpecialite.map((e)=>
                 <>
-                  <h5>{e.nom}</h5>
-                  <h5>{e.nom}</h5>
+                  <h5>Directeur:{e.nom}</h5>
+                  <h5>Président du conseil de surveillance:{e.nom}</h5>
                   <h5>{e.nom}</h5>
                 </>
                   )}
