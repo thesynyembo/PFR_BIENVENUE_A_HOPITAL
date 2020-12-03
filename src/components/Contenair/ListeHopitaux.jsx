@@ -105,7 +105,7 @@ export default function ListeHopitaux() {
                   <Feed.Date>              
                     {e.adress}
                   </Feed.Date><br/>
-                  <Link to="/DetailListe">
+                  <Link to={"/DetailListe/" +e.id}>
                     <Button inverted color='red'  className="ButtonIcon" ><i class="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button>
                   </Link>
                 </TitleThree>
@@ -130,7 +130,7 @@ export default function ListeHopitaux() {
                   <Feed.Date>              
                     {e.adress}
                   </Feed.Date><br/>
-                  <Link to="/DetailListe">
+                  <Link to={"/DetailListe/" +e.id}>
                     <Button inverted color='red'  className="ButtonIcon" ><i class="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button>
                   </Link>
                 </TitleThree>
