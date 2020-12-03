@@ -14,16 +14,30 @@ margin-right:10%;
   h5{
     font-family: "Mont Light";
   }
-  p{
-    font-family:"Mont Bold";
-  }
+//  p{
+//     font-family:"Mont Bold";
+//   } 
   .icone{
-    color:#05F2DB;    
+    color:#E60719;    
   }
   .title{
-    background-color:#FF7777;
+    background-color:#E6E6E6;
     width:100%;
-    height:20%;
+    height:20%;    
+    font-size: 23px;
+    font-weight:300;
+  }
+  .adress{
+    font-size: 15px;
+    font-weight:150;
+  }
+  .NewAdress{
+    color:#E60719; 
+    font-style:italic;
+  }
+  .direction{
+    font-size: 15px;
+    font-weight:150;
   }
 `
 
@@ -39,6 +53,7 @@ export default function DetailListe() {
       })
       .catch((erreur) => console.log(erreur));
   }, []);
+
   useEffect(() => {
     axios
       .get(`http://localhost:5000/Specialite`)
@@ -59,7 +74,7 @@ return (
       <Grid>
         <Grid.Column mobile={16} tablet={16} computer={16}> 
           <Grid columns={1} >             
-          <h2 className='title'>{e.name}</h2>
+          <p className='title'>{e.name}</p>
           </Grid>
         </Grid.Column>
         <Grid.Column mobile={16} tablet={13} computer={13}>
@@ -68,12 +83,12 @@ return (
               <Image src={logo} style={{ height: "150px", width:"350px"}}/>
             </Grid.Column>
             <Grid.Column>
-              <h5><Icon name='map marker alternate' className="icone"/>Adresse : {e.name}</h5>              
-              <h5><Icon name='map outline' className="icone"/>Commune : {e.name}</h5>          
-              <h5><Icon name='phone' className="icone"/>Gmail : {e.phone}</h5>
-              <h5><Icon name='info' className="icone"/>Langue(s) :{e.email}</h5>
-              <h5><Icon name='clock outline' className="icone"/>Heure : {e.email}</h5>
-              <h5><Icon name='info' className="icone"/>{e.email}</h5> 
+              <p className='adress'><Icon name='map marker alternate' className="icone"/><span className='NewAdress'>Adresse :</span> {e.name}</p>              
+              <p className='adress'><Icon name='map outline' className="icone"/><span className='NewAdress'>Commune : </span>{e.name}</p>          
+              <p className='adress'><Icon name='phone' className="icone"/><span className='NewAdress'>Gmail : </span> {e.phone}</p>
+              <p className='adress'><Icon name='info' className="icone"/><span className='NewAdress'>Langue(s) : </span>{e.email}</p>
+              <p className='adress'><Icon name='clock outline' className="icone"/><span className='NewAdress'>Heure : </span>{e.email}</p>
+              <p className='adress'><Icon name='info' className="icone"/><span className='NewAdress'>fffff : </span>{e.email}</p> 
             </Grid.Column>
           </Grid>
         </Grid.Column>
@@ -81,37 +96,41 @@ return (
           <Map/>           
         </Grid.Column>
         <Grid.Column mobile={16} tablet={16} computer={16}> 
-        <Grid columns={1} >
-            <h2 className='title'>Spécialités</h2>
-        </Grid>
-        <Grid columns={1}>
-          <Grid.Column> 
+          <Grid columns={1} >
+            <p className='title'>Spécialités</p>
+          </Grid> 
+          <Grid columns={1}>
+            <Grid.Column> 
               {
                 listeSpecialite.map((e)=>
-                  <h5><ul><li>{e.nom}</li></ul></h5>
-                  )}
-          </Grid.Column>
-        </Grid>
-        <Grid columns={1} >
-            <h2 className='title'>Direction de l'hôpital</h2>
-        </Grid>
-        <Grid columns={1}>
-          <Grid.Column> 
+                  <p className='adress'>
+                    <ul>
+                      <li>{e.nom}</li>
+                    </ul>
+                  </p>
+                    )}
+            </Grid.Column>
+          </Grid>
+          <Grid columns={1} >
+            <p className='title'>Direction de l'hôpital</p>
+          </Grid>
+          <Grid columns={1}>
+            <Grid.Column> 
               {
                 listeSpecialite.map((e)=>
                 <>
-                  <h5>Directeur:{e.nom}</h5>
-                  <h5>Président du conseil de surveillance:{e.nom}</h5>
-                  <h5>{e.nom}</h5>
+                  <p className='adress'><span>Directeur : </span>{e.nom}</p>
+                  <p className='adress'><span>Président du conseil de surveillance : </span>{e.nom}</p>
+                  <p className='adress'>{e.nom}</p>
                 </>
-                  )}
-          </Grid.Column>
-        </Grid>
+                    )}
+            </Grid.Column>
+          </Grid>
         </Grid.Column>
       </Grid>
     )}
         </Div><br/><br/><br/><br/><br/>
-        <Footer/>
+        {/* <Footer/> */}
 
   </>
   )

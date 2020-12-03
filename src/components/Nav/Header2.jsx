@@ -7,16 +7,19 @@ import styled from "styled-components"
 const DivNavBar = styled.nav`
 background-color:#FBF6F6;
 margin-top:1%;
-widthy:100%;
-height:20%;
+width:100%;
+height:10%;
   .icone{
     color:red;
   }
   .logo{
     margin:10px;
-    width:20%;
-    height:20%;
+    width:10%;
+    height:10%;
     margin-left:5%;
+  }
+  P{
+    margin-left:18%;
   }
 `;
 
@@ -25,8 +28,9 @@ const Header = () => (
     <Grid>
       <Grid.Column mobile={16} tablet={16} computer={16}>
         <p className="logo">
-          <Image  src={logo} alt=''/>
+          <Image  src={logo} alt=''/> 
         </p>
+        {/* <p className='P'>Plus proche de vous</p> */}
       </Grid.Column>
     </Grid>
   </DivNavBar>

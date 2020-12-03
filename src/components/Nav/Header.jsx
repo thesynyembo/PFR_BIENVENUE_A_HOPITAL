@@ -5,7 +5,6 @@ import styled from "styled-components"
 
 
 const DivNavBar = styled.nav`
-
 .logo{
   margin:10px;
   width:100%;
@@ -15,8 +14,8 @@ const DivNavBar = styled.nav`
 
 const Header = () => (
   <DivNavBar>
-      <div className="logo"><Image src={logo}  /><br></br>
-</div>
+    <div className="logo"><Image src={logo}  /><br></br>
+    </div>
   </DivNavBar>
 )
 

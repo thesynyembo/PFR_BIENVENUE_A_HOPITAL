@@ -30,10 +30,10 @@ export default function Map() {
     axios
       .get(`http://localhost:5000/Map`)
       .then((res) => {
+        setLoad(true);
         setDataHopital(res.data);
         console.log(res.data);
-        createMap(mapRef, formatHopital(res.data), formatSpecialite(res.data));
-        setLoad(true);
+        createMap(mapRef, formatHopital(res.data));
         // createMap(mapref)
       })
       .catch((erreur) => console.log(erreur));
@@ -53,7 +53,7 @@ export default function Map() {
         let feature = customData.features[i];
         // gérer les requêtes avec une capitalisation différente de celle des données source en appelant toLowerCase ()
         if (
-          feature.properties.name.toLowerCase().search(query.toLowerCase()) !==
+          feature.properties.name.nom.toLowerCase().search(query.toLowerCase()) !==
           -1
         ) {
           // ajouter un emoji d'arbre comme préfixe pour les résultats de données personnalisés
@@ -102,8 +102,7 @@ export default function Map() {
       });
     });
     
-        // Lorsqu'un événement de clic se produit sur une entité dans la couche des lieux, ouvrez une fenêtre contextuelle
-    // l'emplacement de la fonctionnalité, avec la description HTML de ses propriétés.
+    // Lorsqu'un événement de clic se produit sur une entité dans la couche des lieux, ouvrez une fenêtre contextuelle l'emplacement de la fonctionnalité, avec la description HTML de ses propriétés.
     map.on("click", "states", function (e) {
       setselectHopital(e.features[0].properties)
       setdisplayDetailHopital(true)
@@ -150,12 +149,28 @@ export default function Map() {
       },
     };
   }
+
+  function changementDisplay() {
+    setdisplayDetailHopital(false)
+  }
+  // if (load === false) {
+  //   return <Loading/>;
+  // }
   return (
     <>
+      {console.log('sgufidgksqgdgslhcioijezomjdmoejzd',load)}
       <DivMap style={{ height: ""}}>
-        <div className="map-container" ref={mapRef} />  
-          {displayDetailHopital ? <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital} /> : ""}
-      </DivMap>
+      {load === false ? (
+                    <Loading />
+                  ) : (
+                    <>
+                    <div className="map-container" ref={mapRef} />  
+                    {displayDetailHopital ? <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital}  changementDisplay={changementDisplay} /> : ""}</>
+
+                  )}
+                  </DivMap>
+        
+      
       
     </>
   );

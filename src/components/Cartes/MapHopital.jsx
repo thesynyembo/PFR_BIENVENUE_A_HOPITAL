@@ -16,7 +16,7 @@ const MapHopital = () => (
         <ListeHopitaux/>
       </Grid.Column>
     </Grid><br/><br/><br/><br/>
-    <Footer/>
+    {/* <Footer/> */}
   </>
 )
 
