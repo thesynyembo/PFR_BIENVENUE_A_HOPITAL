@@ -4,14 +4,16 @@ export function formatHopital(hopital) {
         id_hopital: element.id,
         name: element.name,
         adress: element.adress,
+        commune: element.commune,
         email: element.email,
         image: element.image,
-        heure_ouverture: element.heure_ouverture,
-        heure_fermeture: element.heure_ouverture,
+        heure_ferme_ouvert: element.heure_ferme_ouvert,
         latitude: element.latitude,
         longitude: element.longitude,
         phone: element.phone,
         description: element.description,
+        directeur: element.directeur,
+        president_surveillance: element.president_surveillance
       };
     });
   }

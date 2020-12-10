@@ -10,7 +10,12 @@ import Loading from '../Contenair/loader'
 
 const DivMap = styled.div`
   width: 100%;
+  span{
+    color: red;
+    text-align:center;
+  }
 `;
+
 
 export default function Map() {
 
@@ -42,7 +47,7 @@ export default function Map() {
   function createMap(mapRef, data) {
     const map = new mapboxgl.Map({
       container: mapRef.current,
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/mapbox/light-v10",
       center: [15.322222, -4.325],
       zoom: 11,
     });
@@ -96,11 +101,38 @@ export default function Map() {
         type: "symbol",
         source: "states",
         layout: {
-          "icon-image": "town-hall-15",
-          "icon-allow-overlap": true,
+          'icon-image': 'hospital-15',
+          'icon-allow-overlap': true
         },
+        paint: { }
+      });
+      map.addLayer({
+        id: 'states',
+        type: 'symbol',
+        source: "states",
+        layout: {
+          'icon-image': 'library-15'
+        },
+        paint: { }
       });
     });
+    var popup = new mapboxgl.Popup();
+
+map.on('mousemove', function(e) {
+  var features = map.queryRenderedFeatures(e.point, { layers: ['states'] });
+  if (!features.length) {
+    popup.remove();
+    return;
+  }
+  const feature = features[0];
+
+  popup.setLngLat(feature.geometry.coordinates)
+    .setHTML("<div> <span>Hôpital </span>"+feature.properties.name+"</div>")
+    .addTo(map);
+
+  map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+});
+  
     
     // Lorsqu'un événement de clic se produit sur une entité dans la couche des lieux, ouvrez une fenêtre contextuelle l'emplacement de la fonctionnalité, avec la description HTML de ses propriétés.
     map.on("click", "states", function (e) {
