@@ -116,19 +116,18 @@ export default function Map() {
         paint: { }
       });
     });
-    var popup = new mapboxgl.Popup();
-
+// Popup
+const popup = new mapboxgl.Popup();
 map.on('mousemove', function(e) {
-  var features = map.queryRenderedFeatures(e.point, { layers: ['states'] });
+  const features = map.queryRenderedFeatures(e.point, { layers: ['states'] });
   if (!features.length) {
     popup.remove();
     return;
   }
   const feature = features[0];
-
   popup.setLngLat(feature.geometry.coordinates)
-    .setHTML("<div> <span>Hôpital </span>"+feature.properties.name+"</div>")
-    .addTo(map);
+  .setHTML("<div class='pop'> <strong><span>Hôpital </span>"+feature.properties.name+"</strong></div>")
+  .addTo(map);
 
   map.getCanvas().style.cursor = features.length ? 'pointer' : '';
 });

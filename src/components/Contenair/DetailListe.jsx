@@ -7,6 +7,11 @@ import Header from '../Nav/Header1'
 import Footer from '../Footer/Footer'
 import Map from '../Cartes/MapBYOneHopital'
 
+const Title = styled.p`
+  font-size: 23px;
+  font-weight:300;
+  
+`;
 const Div = styled.div`
 margin-top:5%;
 margin-left:10%;
@@ -23,7 +28,7 @@ margin-right:10%;
   .title{
     background-color:#E6E6E6;
     width:100%;
-    height:20%;    
+    height:20%;  
     font-size: 23px;
     font-weight:300;
   }

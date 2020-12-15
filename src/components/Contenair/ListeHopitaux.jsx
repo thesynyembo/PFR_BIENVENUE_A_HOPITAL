@@ -5,7 +5,7 @@ import styled from "styled-components"
 import logo from "../Img/ngaliema.jpg"
 import { Link } from "react-router-dom"
 import CustomScroll from 'react-customscroll';
-import Loading from '../Contenair/loader'
+import Loading from './loader'
 
 const Title = styled.p`
   font-size: 23px;
@@ -14,7 +14,7 @@ const Title = styled.p`
 const TitleTwo = styled.p`
   font-size: 18px;
   font-weight:100;
-  color:#0511F2;
+  color:#049DD9;
 `;
 const TitleThree = styled.p`
   font-size: 15px;
@@ -46,7 +46,7 @@ margin:20px 20px;
   color:red;
   }
   `;
-export default function ListeHopitaux() {
+export default function MenuRight() {
   const [listeHopital, setListeHopital] = useState([]);
   const [load, setLoad] = useState(false);
 
