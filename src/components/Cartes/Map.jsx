@@ -7,6 +7,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import CardDetailHopital from '../Contenair/CardDetailHopital';
 import Loading from '../Contenair/loader'
+import * as turf from '@turf/turf'
 
 const DivMap = styled.div`
   width: 100%;
@@ -14,6 +15,21 @@ const DivMap = styled.div`
     color: red;
     text-align:center;
   }
+  .distance-container {
+    position: absolute;
+    left: 10px;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 11px;
+    line-height: 18px;
+    display: block;
+    margin-top: 10px;
+    margin-left: 12px;
+    padding: 7px 10px;
+    border-radius: 3px;
+    box-shadow: 2px 3px 2px 1px rgba(0, 0, 0, 0.3);
+    }
 `;
 
 
@@ -28,7 +44,8 @@ export default function Map() {
     description :''
   });
   const [dataHopital, setDataHopital] = useState([]);
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(false);  
+  const [distance, setDisatnce] = useState([]);
  
 
   useEffect(() => {
@@ -58,7 +75,7 @@ export default function Map() {
         let feature = customData.features[i];
         // gérer les requêtes avec une capitalisation différente de celle des données source en appelant toLowerCase ()
         if (
-          feature.properties.name.nom.toLowerCase().search(query.toLowerCase()) !==
+          feature.properties.name.toLowerCase().search(query.toLowerCase()) !==
           -1
         ) {
           // ajouter un emoji d'arbre comme préfixe pour les résultats de données personnalisés
@@ -151,7 +168,132 @@ map.on('mousemove', function(e) {
       map.getCanvas().style.cursor = "";
     });
     
-  } 
+   // mapExemple
+
+    // var distanceContainer = document.getElementById('distance');
+
+    // GeoJSON object to hold our measurement features
+    // Objet GeoJSON pour contenir nos fonctionnalités de mesure
+    var geojson = {
+      'type': 'FeatureCollection',
+      'features': []
+  };
+
+  // Used to draw a line between points
+  // Utilisé pour tracer une ligne entre les points
+  var linestring = {
+      'type': 'Feature',
+      'geometry': {
+          'type': 'LineString',
+          'coordinates': []
+      }
+  };
+
+  map.on('load', function () {
+      map.addSource('geojson', {
+          'type': 'geojson',
+          'data': geojson
+      });
+
+      // Add styles to the map
+      map.addLayer({
+          id: 'measure-points',
+          type: 'circle',
+          source: 'geojson',
+          paint: {
+              'circle-radius': 5,
+              'circle-color': '#000'
+          },
+          filter: ['in', '$type', 'Point']
+      });
+      map.addLayer({
+          id: 'measure-lines',
+          type: 'line',
+          source: 'geojson',
+          layout: {
+              'line-cap': 'round',
+              'line-join': 'round'
+          },
+          paint: {
+              'line-color': '#000',
+              'line-width': 2.5
+          },
+          filter: ['in', '$type', 'LineString']
+      });
+
+      map.on('click', function (e) {
+        console.log("thythy",e)
+          var features = map.queryRenderedFeatures(e.point, {
+              layers: ['measure-points']
+          });
+
+          // Remove the linestring from the group
+          // So we can redraw it based on the points collection
+
+          // Supprime la chaîne de lignes du groupe
+          // Nous pouvons donc le redessiner en fonction de la collection de points
+          if (geojson.features.length > 1) geojson.features.pop();
+
+          // Clear the Distance container to populate it with a new value
+          // Effacez le conteneur Distance pour le remplir avec une nouvelle valeur
+          // document.getElementById('distance').innerHTML('');
+
+          // If a feature was clicked, remove it from the map
+          // Si vous avez cliqué sur une entité, supprimez-la de la carte
+          if (features.length) {
+              var id = features[0].properties.id;
+              geojson.features = geojson.features.filter(function (point) {
+                  return point.properties.id !== id;
+              });
+          } else {
+              var point = {
+                  'type': 'Feature',
+                  'geometry': {
+                      'type': 'Point',
+                      'coordinates': [e.lngLat.lng, e.lngLat.lat]
+                  },
+                  'properties': {
+                      'id': String(new Date().getTime())
+                  }
+              };
+
+              geojson.features.push(point);
+          }
+
+          if (geojson.features.length > 1) {
+              linestring.geometry.coordinates = geojson.features.map(
+                  function (point) {
+                      return point.geometry.coordinates;
+                  }
+              );
+
+              geojson.features.push(linestring);
+
+              // Populate the distanceContainer with total distance
+              // Remplissez le conteneur de distance avec la distance totale
+              var value = document.createElement('pre');
+              setDisatnce(turf.length(linestring).toLocaleString())
+              
+              value.textContent =
+                  'Total distance: ' + turf.length(linestring).toLocaleString() +'km';
+                  // document.getElementById('distance').appendChild(value);
+          }
+
+          map.getSource('geojson').setData(geojson);
+      });
+  });
+
+  map.on('mousemove', function (e) {
+      var features = map.queryRenderedFeatures(e.point, {
+          layers: ['measure-points']
+      });
+      // UI indicator for clicking/hovering a point on the map        
+      // Indicateur d'interface utilisateur pour cliquer / survoler un point sur la carte
+      map.getCanvas().style.cursor = features.length
+          ? 'pointer'
+          : 'crosshair';
+  });
+}
 
   
    function formatDataHopital(data) {
@@ -184,17 +326,15 @@ map.on('mousemove', function(e) {
   function changementDisplay() {
     setdisplayDetailHopital(false)
   }
-  // if (load === false) {
-  //   return <Loading/>;
-  // }
+
   return (
     <>
-      {console.log('sgufidgksqgdgslhcioijezomjdmoejzd',load)}
       <DivMap style={{ height: ""}}>
       {load === false ? (
                     <Loading />
                   ) : (
                     <>
+                    <div id="distance" className="distance-container">Total distance à parcourir :  {distance} km </div>
                     <div className="map-container" ref={mapRef} />  
                     {displayDetailHopital ? <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital}  changementDisplay={changementDisplay} /> : ""}</>
 

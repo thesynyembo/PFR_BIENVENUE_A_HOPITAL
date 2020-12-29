@@ -1,49 +1,35 @@
-import React from 'react'
-import {Grid, Icon} from 'semantic-ui-react'
+import React from "react"
 import styled from "styled-components"
+import { Grid, Icon} from 'semantic-ui-react'
+import logo from '../Img/logoBAH2.png'
 
-const DivColumns = styled.div`
-
-  ul{
-    display:flex;
-    justify-content: flex-start;
-    margin-left:50%; 
-    list-style-type: none;   
+const Div = styled.div`
+  background:#9D9D9C;
+  height: 30%;
+  // padding-bottom: 10%;
+  color: white;
+  padding-left:2%;
+  font-size: 10px;
+  font-weight:100;
+  font-style:italic;
+  .logo{
+    width:50%;
+    height:50%;
   }
-  .icone{
-    font-size:2em;
-    padding-top:50%;
-    color:#05F2DB;    
-  }
-  h6{
-    margin-left:15%;
-  }
-`
+`;
+const Footer = () => (
+  <Div>
+    <Grid>
+    <Grid.Column mobile={10} tablet={10} computer={10}>
+      Copyright ©2020 Thesy NYEMBO <br/> 
+      - Dev Web et Mobile
+    </Grid.Column>
+    {/* <Grid.Column mobile={6} tablet={6} computer={6}>       
+      <img className='logo' src={logo}/>
+    </Grid.Column> */}
+    </Grid>
 
-export default function Footer (){
+  </Div>
+);
 
-  return (
-    <>
-      <Grid.Column mobile={16} tablet={16} computer={16} style={{background:'silver',borderTopLeftRadius: '15px 15px',borderTopRightRadius: '15px 15px',height:'100px'}}>
-        <DivColumns>
-          <Grid columns={2}>
-            <Grid.Column>
-              <h6>A propos</h6>
-              <h6>Copyright 2020 
-    Créer par Kinshasa Digital Academy</h6>
-            </Grid.Column>
-            <Grid.Column> 
-              <ul>
-                <a href='' target="target"><li><Icon name='facebook f' className='icone'/></li></a>
-                <a href='' target="target"><li><Icon name='twitter' className='icone'/> </li></a>
-                <a href='' target="target"><li><Icon name='linkedin' className='icone'/> </li></a>
-              </ul>
-            </Grid.Column>
-          </Grid>
-        </DivColumns>
-      </Grid.Column>
-    
-
-    </>
-  )
-}
+export default Footer
