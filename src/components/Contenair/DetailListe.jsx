@@ -6,13 +6,7 @@ import styled from "styled-components"
 import Header from '../Nav/Header1'
 import Footer from '../Footer/Footer'
 import Map from '../Cartes/MapBYOneHopital'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useParams,
-  Link
-} from "react-router-dom";
+import {  useParams} from "react-router-dom";
 
 const Title = styled.p`
   font-size: 23px;
@@ -57,20 +51,22 @@ export default function DetailListe() {
   const [listeHopital, setListeHopital] = useState([]);
   const [listeSpecialite, setListeSpecialite] = useState([]);
   // let {id} = useParams();
-  const params = window.location.href;
-  const id=params.split('DetailListe/');
-  console.log("je suis params",id[1])
+  // const params = window.location.href;
+  // const id=params.split('DetailListe/');
+  // console.log("je suis params",id[1])
+  let { id } = useParams();
+  const params = { id };
+  console.log(params.id);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/Map/`+id[1])
+      // .get(`http://localhost:5000/Map/`+id[1])
+      .get(`http://localhost:5000/Map/${params.id}?`)
       .then((res) => {
         setListeHopital(res.data);
         console.log('DetailListe',res.data);
       })
       .catch((erreur) => console.log(erreur));
-  }, []);
 
-  useEffect(() => {
     axios
       .get(`http://localhost:5000/Specialite`)
       .then((res) => {
@@ -84,13 +80,15 @@ return (
   <>
     <Header/>
     <Div>
-  {
-    listeHopital.map((e)=>
+  
     
       <Grid>
         <Grid.Column mobile={16} tablet={16} computer={16}> 
-          <Grid columns={1} >             
-          <p className='title'>{e.name}</p>
+          <Grid columns={1} >   
+          {
+    listeHopital.map((e,index)=>          
+          <p className='title' key={index}>{e.name}</p>
+          )}
           </Grid>
         </Grid.Column>
         <Grid.Column mobile={16} tablet={13} computer={13}>
@@ -99,12 +97,17 @@ return (
               <Image src={logo} style={{ height: "150px", width:"350px"}}/>
             </Grid.Column>
             <Grid.Column>
+            {
+    listeHopital.map((e)=>
+    <>          
               <p className='adress'><Icon name='map marker alternate' className="icone"/><span className='NewAdress'>Adresse :</span> {e.name}</p>              
               <p className='adress'><Icon name='map outline' className="icone"/><span className='NewAdress'>Commune : </span>{e.name}</p>          
               <p className='adress'><Icon name='phone' className="icone"/><span className='NewAdress'>Gmail : </span> {e.phone}</p>
               <p className='adress'><Icon name='info' className="icone"/><span className='NewAdress'>Langue(s) : </span>{e.email}</p>
               <p className='adress'><Icon name='clock outline' className="icone"/><span className='NewAdress'>Heure : </span>{e.email}</p>
               <p className='adress'><Icon name='info' className="icone"/><span className='NewAdress'>fffff : </span>{e.email}</p> 
+              </>
+              )}
             </Grid.Column>
           </Grid>
         </Grid.Column>
@@ -119,11 +122,9 @@ return (
             <Grid.Column> 
               {
                 listeSpecialite.map((e)=>
-                  <p className='adress'>
-                    <ul>
+                    <ul className='adress'>
                       <li>{e.nom}</li>
                     </ul>
-                  </p>
                     )}
             </Grid.Column>
           </Grid>
@@ -144,7 +145,7 @@ return (
           </Grid>
         </Grid.Column>
       </Grid>
-    )}
+
         </Div><br/><br/><br/><br/><br/>
         {/* <Footer/> */}
 

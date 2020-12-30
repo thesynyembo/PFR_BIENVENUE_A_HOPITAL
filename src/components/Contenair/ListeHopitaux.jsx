@@ -16,7 +16,7 @@ const TitleTwo = styled.p`
   font-weight:100;
   color:#049DD9;
 `;
-const TitleThree = styled.p`
+const TitleThree = styled.div`
   font-size: 15px;
   font-weight:300;
   font-style:italic;
@@ -96,9 +96,9 @@ const rechercheHopital=(e)=>{
       <div style={{height: '400px', overflow: 'hidden',Color:'red',marginTop:'10px'}}>
       <CustomScroll>
         <div></div>
-      <Card className="carte">
         {
-      listeHopital.map((e)=>
+      listeHopital.map((e,index)=>
+      <Card className="carte">        
         <Card.Content>
           <Grid>
             <Grid.Column mobile={5} tablet={5} computer={5} className="DivBar">
@@ -107,20 +107,21 @@ const rechercheHopital=(e)=>{
               </Feed.Extra>
             </Grid.Column>
             <Grid.Column mobile={11} tablet={11} computer={11}>
-              <TitleTwo style={{marginLeft:'30%'}}>Hôpital {e.name}</TitleTwo>
+              <TitleTwo key={index} style={{marginLeft:'30%'}}>Hôpital {e.name}</TitleTwo>
                 <TitleThree style={{marginLeft:'30%'}}>
-                  <Feed.Date>              
+                  <Feed.Date key={index}>              
                     {e.adress}
                   </Feed.Date><br/>
                   <Link to={"/DetailListe/" +e.id}>
-                    <Button inverted color='red'  className="ButtonIcon" ><i class="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button>
+                    <Button inverted color='red' className="ButtonIcon" ><i className="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button>
                   </Link>
                 </TitleThree>
             </Grid.Column>
           </Grid>
         </Card.Content>
-      )}
       </Card>
+      
+      )}
       <div></div>
       </CustomScroll>
       </div>

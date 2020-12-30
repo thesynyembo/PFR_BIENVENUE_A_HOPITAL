@@ -23,7 +23,7 @@ const Header = () => (
     <Grid>
       <Grid.Column mobile={16} tablet={16} computer={16}>
           <Link to="/">
-            <i class="fad fa-angle-double-left icone" style={{fontSize:"3em"}}></i>
+            <i className="fad fa-angle-double-left icone" style={{fontSize:"3em"}}></i>
           </Link>
         <div className="logo">
           <Link to='/'>

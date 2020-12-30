@@ -4,7 +4,8 @@ import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  BrowserRouter
 } from "react-router-dom"
 // import ListeHopitaux from "./components/Contenair/ListeHopitaux"
 import DetailListe from "./components/Contenair/DetailListe"
@@ -22,7 +23,7 @@ function App() {
    {/* <Route path="/DetailList">
     <ListeHopitaux/>
    </Route> */}
-   <Route path="/DetailListe">
+   <Route path="/DetailListe/:id">
     <DetailListe/>
    </Route>
   </Switch>
