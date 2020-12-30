@@ -91,7 +91,7 @@ return (
           )}
           </Grid>
         </Grid.Column>
-        <Grid.Column mobile={16} tablet={13} computer={13}>
+        <Grid.Column mobile={16} tablet={11} computer={11}>
           <Grid columns={2}>
             <Grid.Column>        
               <Image src={logo} style={{ height: "150px", width:"350px"}}/>
@@ -111,7 +111,7 @@ return (
             </Grid.Column>
           </Grid>
         </Grid.Column>
-        <Grid.Column mobile={10} tablet={3} computer={3}> 
+        <Grid.Column mobile={10} tablet={5} computer={5}> 
           <Map/>           
         </Grid.Column>
         <Grid.Column mobile={16} tablet={16} computer={16}> 

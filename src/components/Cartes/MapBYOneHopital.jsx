@@ -6,6 +6,8 @@ import {formatHopital, formatSpecialite} from "../../services/api/helper"
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
 import Loading from '../Contenair/loader'
 
+import {  useParams} from "react-router-dom";
+
 
 const DivMap = styled.div`
 .map{
@@ -19,13 +21,12 @@ export default function Map() {
   mapboxgl.accessToken =
     "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
   const [mapRef, setMapRef] = useState(React.createRef());
-  const params = window.location.href;
-  const id=params.split('DetailListe/');
-  console.log('je suis Map',id);
-
+  let { id } = useParams();
+  const params = { id };
+  console.log(params.id);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/Map`+id[1])
+      .get(`http://localhost:5000/Map/${params.id}`)
       .then((res) => {
         //setLoad(true);
         //console.log(res.data);
@@ -45,15 +46,7 @@ export default function Map() {
     });
 
 
-    map.addControl(new mapboxgl.NavigationControl(), "bottom-right");   
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-      })
-    );  
+    map.addControl(new mapboxgl.NavigationControl(), "bottom-right");     
     map.on("load", function () {
     map.addSource("states", formatGeoJson(data));
       // Ajoutez un calque montrant les lieux.
@@ -70,7 +63,25 @@ export default function Map() {
           'icon-color' : '#FF4858',
        }
       });
-    });   
+    });  
+    
+    // Popup
+const popup = new mapboxgl.Popup();
+map.on('mousemove', function(e) {
+  const features = map.queryRenderedFeatures(e.point, { layers: ['states'] });
+  if (!features.length) {
+    popup.remove();
+    return;
+  }
+  const feature = features[0];
+  popup.setLngLat(feature.geometry.coordinates)
+  .setHTML("<div class='pop'> <strong>"+feature.properties.name+"</strong></div>")
+  .addTo(map);
+
+  map.getCanvas().style.cursor = features.length ? 'pointer' : '';
+});
+  
+
   } 
  
    function formatDataHopital(data) {

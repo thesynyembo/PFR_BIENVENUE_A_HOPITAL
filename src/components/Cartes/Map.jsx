@@ -19,14 +19,16 @@ const DivMap = styled.div`
     position: absolute;
     left: 10px;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    font-size: 11px;
+    background-color: rgba(202, 211, 210, 0.5);
+    color: #6b6b6b;
+    font-size: 15px;
+    font-weight:100;    
+    font-style:italic;
     line-height: 18px;
     display: block;
     margin-top: 10px;
     margin-left: 12px;
-    padding: 7px 10px;
+    padding: 10px 10px;
     border-radius: 3px;
     box-shadow: 2px 3px 2px 1px rgba(0, 0, 0, 0.3);
     }
@@ -143,7 +145,7 @@ map.on('mousemove', function(e) {
   }
   const feature = features[0];
   popup.setLngLat(feature.geometry.coordinates)
-  .setHTML("<div class='pop'> <strong><span>Hôpital </span>"+feature.properties.name+"</strong></div>")
+  .setHTML("<div className='pop'> <strong><span>Hôpital </span>"+feature.properties.name+"</strong></div>")
   .addTo(map);
 
   map.getCanvas().style.cursor = features.length ? 'pointer' : '';
@@ -330,15 +332,15 @@ map.on('mousemove', function(e) {
   return (
     <>
       <DivMap style={{ height: ""}}>
-      {load === false ? (
+      {/* {load === false ? (
                     <Loading />
-                  ) : (
+                  ) : ( */}
                     <>
-                    <div id="distance" className="distance-container">Total distance à parcourir :  {distance} km </div>
+                    <div id="distance" className="distance-container"><strong>Total distance à parcourir :  <span>{distance} </span>km </strong></div>
                     <div className="map-container" ref={mapRef} />  
                     {displayDetailHopital ? <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital}  changementDisplay={changementDisplay} /> : ""}</>
-
-                  )}
+{/* 
+                  )} */}
                   </DivMap>
         
       

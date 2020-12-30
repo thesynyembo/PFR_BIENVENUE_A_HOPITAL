@@ -22,18 +22,17 @@ const Div = styled.div`
       color:#D90718;    
     }
     .title{
-      color:#D90718;
-      background-color:#FBF6F6;
-      width:100%;
-      height:20%;
-      margin-top:3%;
-      padding-top:3%;
-      padding-bottom:3%;
-      text-align:center;
+      color: #D90718;
+      // background-color: #FBF6F6;
+      margin-left: -3rem;
+      padding-top: 7%;
+      padding-bottom: 6%;
+      text-align: center;
       font-size: 23px;
-      font-weight:300;
-      font-style:italic;
+      font-weight: 300;
+      font-style: italic;
     }
+
     ol{
       display:flex;
       justify-content: flex-start; 
@@ -50,7 +49,7 @@ const Div = styled.div`
       cursor:pointer;
       position:absolute;
       z-index:3;
-      right:4%;
+      padding-left: 5rem;
       margin-top:4%;
       font-size:2em;
       color:#D90718;
@@ -93,12 +92,12 @@ export default function CardDetailHopital ({ hopital , visible, changementDispla
     < div className="ContainerCarte">
       <CustomScroll>
       <Grid>
-        <Grid.Column mobile={16} tablet={16} computer={16}> 
-          <Grid columns={1} >        
+            <Grid.Column mobile={11} tablet={11} computer={11}>
+            <p className='title'> Hôpital {hopital.name}</p> 
+            </Grid.Column>
+          <Grid.Column mobile={5} tablet={5} computer={5}> 
             <div className='annuler' onClick={()=>changementDisplay()}><i class="far fa-window-close"></i></div>
-            <p className='title'> Hôpital {hopital.name}</p>   
-          </Grid>       
-        </Grid.Column>
+            </Grid.Column>
         <Grid.Column mobile={16} tablet={6} computer={6}>      
           <Image src={logos} style={{textAlign:"center"}} />
         </Grid.Column>

@@ -48,9 +48,22 @@
   color:#9D9D9C;
 }
 
-@media screen and (max-width: 793px) {
-  .App{
-    background-color: blue;
+a.mapboxgl-ctrl-logo {
+  display: none;
+}
+.mapboxgl-ctrl-attrib-inner {
+  display: none;
+}
+
+
+
+@media only screen and (max-width: 555px) {
+  .distance-container{
+    margin-top:5rem !important;
+    margin-left:5.50rem !important;
+  }
+  .annuler{
+    padding-left: 1rem;
   }
 }
 .mapboxgl-ctrl-geocoder--input {

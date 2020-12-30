@@ -80,9 +80,9 @@ const rechercheHopital=(e)=>{
 
     <Div>
  
-    {load === false ? (
+    {/* {load === false ? (
                     <Loading />
-                  ) : (
+                  ) : ( */}
                         <>
                         <Grid.Column mobile={16} tablet={16} computer={16}>
                             <Title>Liste des hôpitaux</Title>
@@ -127,7 +127,7 @@ const rechercheHopital=(e)=>{
       </div>
     </>
 
-                  )}
+                  {/* )} */}
       
     </Div>
 
