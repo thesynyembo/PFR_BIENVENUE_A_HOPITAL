@@ -6,6 +6,13 @@ import styled from "styled-components"
 import Header from '../Nav/Header1'
 import Footer from '../Footer/Footer'
 import Map from '../Cartes/MapBYOneHopital'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useParams,
+  Link
+} from "react-router-dom";
 
 const Title = styled.p`
   font-size: 23px;
@@ -49,9 +56,13 @@ margin-right:10%;
 export default function DetailListe() {
   const [listeHopital, setListeHopital] = useState([]);
   const [listeSpecialite, setListeSpecialite] = useState([]);
+  // let {id} = useParams();
+  const params = window.location.href;
+  const id=params.split('DetailListe/');
+  console.log("je suis params",id[1])
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/Map`)
+      .get(`http://localhost:5000/Map/`+id[1])
       .then((res) => {
         setListeHopital(res.data);
         console.log('DetailListe',res.data);

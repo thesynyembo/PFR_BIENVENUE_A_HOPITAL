@@ -19,11 +19,13 @@ export default function Map() {
   mapboxgl.accessToken =
     "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
   const [mapRef, setMapRef] = useState(React.createRef());
- 
+  const params = window.location.href;
+  const id=params.split('DetailListe/');
+  console.log('je suis Map',id);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/Map`)
+      .get(`http://localhost:5000/Map`+id[1])
       .then((res) => {
         //setLoad(true);
         //console.log(res.data);

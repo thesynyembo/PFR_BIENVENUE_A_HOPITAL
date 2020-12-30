@@ -49,26 +49,32 @@ margin:20px 20px;
 export default function MenuRight() {
   const [listeHopital, setListeHopital] = useState([]);
   const [load, setLoad] = useState(false);
-  const [search, setSearch] = useState('');
-  const [datasearch, setDataSearch] = useState([]);
+  const [search, setSearch] = useState([]);
+  const [dataSearch, setDataSearch] = useState('');
 
   useEffect(() => {
     axios
       .get(`http://localhost:5000/Map`)
       .then((res) => {
         setListeHopital(res.data);
-        setSearch(res.data);
-        console.log("jettttttttttt",search);
         setLoad(true);
+        setSearch(res.data);
+        console.log('je suis search',res.data)
       })
       .catch((erreur) => console.log(erreur));
   }, []);
 
-  const findAgence = (data) => {
-    // setSearch(data)
-    // console.log(nomagence);
-    let motminuscule= data.toLowerCase();
-    setDataSearch(data.filter(element => element.name.toLowerCase().match(motminuscule)))    }
+
+const rechercheHopital=(e)=>{
+  setDataSearch(e.target.value.toLowerCase());
+  
+
+  const thisSearch = listeHopital.filter(searchHopital=>searchHopital.name.includes(dataSearch) );
+  setListeHopital(thisSearch);
+  console.log('barre',thisSearch);
+}
+
+
   return (
   <>
 
@@ -82,8 +88,7 @@ export default function MenuRight() {
                             <Title>Liste des hôpitaux</Title>
                           </Grid.Column>
                           <Grid.Column mobile={16} tablet={16} computer={16}>
-                          <Input type='text' placeholder='Rechercher un hôpital' fluid icon='search' value={search}
-                    onChange={(data)=>findAgence(data)}/>
+                          <Input type='text' placeholder='Rechercher un hôpital' fluid icon='search' onChange={rechercheHopital}/>
                             
                           </Grid.Column>
                         
