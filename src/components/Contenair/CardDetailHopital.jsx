@@ -49,7 +49,7 @@ const Div = styled.div`
       cursor:pointer;
       position:absolute;
       z-index:3;
-      padding-left: 5rem;
+      padding-left: 3rem;
       margin-top:4%;
       font-size:2em;
       color:#D90718;

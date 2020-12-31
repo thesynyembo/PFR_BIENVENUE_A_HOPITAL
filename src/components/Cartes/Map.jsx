@@ -332,15 +332,15 @@ map.on('mousemove', function(e) {
   return (
     <>
       <DivMap style={{ height: ""}}>
-      {/* {load === false ? (
+      {load === false ? (
                     <Loading />
-                  ) : ( */}
+                  ) : (
                     <>
                     <div id="distance" className="distance-container"><strong>Total distance à parcourir :  <span>{distance} </span>km </strong></div>
                     <div className="map-container" ref={mapRef} />  
                     {displayDetailHopital ? <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital}  changementDisplay={changementDisplay} /> : ""}</>
-{/* 
-                  )} */}
+
+                  )} 
                   </DivMap>
         
       
