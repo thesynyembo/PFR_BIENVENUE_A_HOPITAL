@@ -60,7 +60,7 @@ a.mapboxgl-ctrl-logo {
 @media only screen and (max-width: 555px) {
   .distance-container{
     margin-top:5rem !important;
-    margin-left:5.50rem !important;
+    margin-left: 1rem !important;
   }
   .annuler{
     padding-left: 1rem;
@@ -69,3 +69,35 @@ a.mapboxgl-ctrl-logo {
 .mapboxgl-ctrl-geocoder--input {
   color: red;
 }
+
+.modal {
+  top: 70px;
+  left: 30px;
+  height: 80%;
+
+}
+.ui.green.button, .ui.green.buttons .button {
+  margin-left: 45.7rem;
+}
+
+.ui.form input:not([type]):focus, .ui.form input[type=date]:focus, .ui.form input[type=datetime-local]:focus, .ui.form input[type=email]:focus, .ui.form input[type=file]:focus, .ui.form input[type=number]:focus, .ui.form input[type=password]:focus, .ui.form input[type=search]:focus, .ui.form input[type=tel]:focus, .ui.form input[type=text]:focus, .ui.form input[type=time]:focus, .ui.form input[type=url]:focus {
+  border-color: red;
+}
+.ui.form input:not([type]), .ui.form input[type=date], .ui.form input[type=datetime-local], .ui.form input[type=email], .ui.form input[type=file], .ui.form input[type=number], .ui.form input[type=password], .ui.form input[type=search], .ui.form input[type=tel], .ui.form input[type=text], .ui.form input[type=time], .ui.form input[type=url] {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  /* color: black; */
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  background: transparent;
+}
+.iconModal{
+  color:red;
+} 
+.headerSymbol{
+  margin-left:3rem;
+}
+

@@ -19,10 +19,10 @@ const DivMap = styled.div`
     position: absolute;
     left: 10px;
     z-index: 1;
-    background-color: rgba(202, 211, 210, 0.5);
-    color: #6b6b6b;
-    font-size: 15px;
-    font-weight:100;    
+    background-color: rgba(0,0,0,0.5);
+    color: #fff;
+    size: 15px;
+    font-weight: 500;   
     font-style:italic;
     line-height: 18px;
     display: block;
@@ -100,6 +100,7 @@ export default function Map() {
          mapboxgl: mapboxgl,
          render : function(item){
            return "<div>"+item.properties.name+"</div>"
+                  
          }
        })
     ); 

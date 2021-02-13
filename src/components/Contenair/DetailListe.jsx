@@ -6,8 +6,8 @@ import styled from "styled-components"
 import Header from '../Nav/Header1'
 import Footer from '../Footer/Footer'
 import Map from '../Cartes/MapBYOneHopital'
-import {  useParams} from "react-router-dom";
-
+import { useParams} from "react-router-dom";
+import ModalRes from './Modal'
 const Title = styled.p`
   font-size: 23px;
   font-weight:300;
@@ -47,7 +47,7 @@ margin-right:10%;
   }
 `
 
-export default function DetailListe() {
+export default function DetailListe(changementDisplay) {
   const [listeHopital, setListeHopital] = useState([]);
   const [listeSpecialite, setListeSpecialite] = useState([]);
   // let {id} = useParams();
@@ -102,7 +102,8 @@ return (
     <>          
               <p className='adress'><Icon name='map marker alternate' className="icone"/><span className='NewAdress'>Adresse :</span> {e.name}</p>              
               <p className='adress'><Icon name='map outline' className="icone"/><span className='NewAdress'>Commune : </span>{e.name}</p>          
-              <p className='adress'><Icon name='phone' className="icone"/><span className='NewAdress'>Gmail : </span> {e.phone}</p>
+              <p className='adress'><a href='tel:+243823010561'><Icon name='phone' className="icone"/></a><span className='NewAdress'>Téléphone : </span>{e.name} </p>
+              <p className='adress'><a href='mailto:nyembothesy@gmail.com'><Icon name='envelope' className="icone"/></a><span className='NewAdress'>Gmail : </span>{e.name} </p>
               <p className='adress'><Icon name='info' className="icone"/><span className='NewAdress'>Langue(s) : </span>{e.email}</p>
               <p className='adress'><Icon name='clock outline' className="icone"/><span className='NewAdress'>Heure : </span>{e.email}</p>
               <p className='adress'><Icon name='info' className="icone"/><span className='NewAdress'>fffff : </span>{e.email}</p> 
@@ -144,6 +145,7 @@ return (
             </Grid.Column>
           </Grid>
         </Grid.Column>
+        <ModalRes/>
       </Grid>
 
         </Div><br/><br/><br/><br/><br/>
