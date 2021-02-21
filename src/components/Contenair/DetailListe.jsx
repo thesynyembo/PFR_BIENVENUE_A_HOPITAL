@@ -45,6 +45,8 @@ margin-right:10%;
     font-size: 15px;
     font-weight:150;
   }
+
+
 `
 
 export default function DetailListe(changementDisplay) {
@@ -68,10 +70,10 @@ export default function DetailListe(changementDisplay) {
       .catch((erreur) => console.log(erreur));
 
     axios
-      .get(`http://localhost:5000/Specialite`)
+      .get(`http://localhost:5000/Map/Specialites/${params.id}?`)
       .then((res) => {
         setListeSpecialite(res.data);
-        console.log('listeSpecialite',res.data);
+        console.log('listeSpecialite thesiaaa',res.data);
       })
       .catch((erreur) => console.log(erreur));
   }, []);
@@ -86,35 +88,58 @@ return (
         <Grid.Column mobile={16} tablet={16} computer={16}> 
           <Grid columns={1} >   
           {
-    listeHopital.map((e,index)=>          
+      listeHopital.map((e,index)=>          
           <p className='title' key={index}>{e.name}</p>
           )}
           </Grid>
         </Grid.Column>
+
         <Grid.Column mobile={16} tablet={11} computer={11}>
           <Grid columns={2}>
+          {
+      listeHopital.map((e)=>
             <Grid.Column>        
-              <Image src={logo} style={{ height: "150px", width:"350px"}}/>
-            </Grid.Column>
+              <Image src={e.image} style={{ height: "150px", width:"350px"}}/>
+              <p className='adress'>
+                {e.description} 
+              </p>
+            </Grid.Column> 
+            )}
             <Grid.Column>
             {
-    listeHopital.map((e)=>
-    <>          
-              <p className='adress'><Icon name='map marker alternate' className="icone"/><span className='NewAdress'>Adresse :</span> {e.name}</p>              
-              <p className='adress'><Icon name='map outline' className="icone"/><span className='NewAdress'>Commune : </span>{e.name}</p>          
-              <p className='adress'><a href='tel:+243823010561'><Icon name='phone' className="icone"/></a><span className='NewAdress'>Téléphone : </span>{e.name} </p>
-              <p className='adress'><a href='mailto:nyembothesy@gmail.com'><Icon name='envelope' className="icone"/></a><span className='NewAdress'>Gmail : </span>{e.name} </p>
-              <p className='adress'><Icon name='info' className="icone"/><span className='NewAdress'>Langue(s) : </span>{e.email}</p>
-              <p className='adress'><Icon name='clock outline' className="icone"/><span className='NewAdress'>Heure : </span>{e.email}</p>
-              <p className='adress'><Icon name='info' className="icone"/><span className='NewAdress'>fffff : </span>{e.email}</p> 
+      listeHopital.map((e)=>
+   
+  <>      
+              <p className='adress'>
+                <Icon name='map marker alternate' className="icone"/>
+                  <span className='NewAdress'>Adresse :</span> {e.adress}
+              </p> 
+              <p className='adress'><a href='tel:{e.phone}'>
+                <Icon name='phone' className="icone"/></a>
+                <span className='NewAdress'>Téléphone : </span>{e.phone} 
+              </p>
+              <p className='adress'><a href='mailto:{e.name}'>
+                <Icon name='envelope' className="icone"/></a>
+                  <span className='NewAdress'>Gmail : </span>{e.email} 
+              </p>
+              <p className='adress'>
+                <Icon name='clock outline' className="icone"/>
+                  <span className='NewAdress'>Heure : </span>{e.heure_de_service}
+              </p>
+              <p className='adress'>
+                <Icon name='info' className="icone"/>
+                  <span className='NewAdress'>Langue(s) : </span>{e.email}
+              </p>
               </>
               )}
             </Grid.Column>
           </Grid>
         </Grid.Column>
+
         <Grid.Column mobile={10} tablet={5} computer={5}> 
           <Map/>           
         </Grid.Column>
+
         <Grid.Column mobile={16} tablet={16} computer={16}> 
           <Grid columns={1} >
             <p className='title'>Spécialités</p>
@@ -135,20 +160,21 @@ return (
           <Grid columns={1}>
             <Grid.Column> 
               {
-                listeSpecialite.map((e)=>
+                listeHopital.map((e)=>
                 <>
-                  <p className='adress'><span>Directeur : </span>{e.nom}</p>
-                  <p className='adress'><span>Président du conseil de surveillance : </span>{e.nom}</p>
-                  <p className='adress'>{e.nom}</p>
+                  <p className='adress'>
+                    <span>Directeur : </span>{e.directeur}
+                  </p>
                 </>
                     )}
             </Grid.Column>
           </Grid>
         </Grid.Column>
-        <ModalRes/>
+        {/* <ModalRes/> */}
+
       </Grid>
 
-        </Div><br/><br/><br/><br/><br/>
+    </Div><br/><br/><br/><br/><br/>
         {/* <Footer/> */}
 
   </>

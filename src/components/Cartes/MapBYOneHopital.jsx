@@ -2,9 +2,8 @@ import axios from "axios"
 import mapboxgl from "mapbox-gl"
 import styled from "styled-components"
 import React, { useState, useEffect } from "react"
-import {formatHopital, formatSpecialite} from "../../services/api/helper"
+import {formatHopital} from "../../services/api/helper"
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
-import Loading from '../Contenair/loader'
 
 import {  useParams} from "react-router-dom";
 
@@ -28,10 +27,7 @@ export default function Map() {
     axios
       .get(`http://localhost:5000/Map/${params.id}`)
       .then((res) => {
-        //setLoad(true);
-        //console.log(res.data);
         createMap(mapRef, formatHopital(res.data));
-        // createMap(mapref)
       })
       .catch((erreur) => console.log(erreur));
   }, []);
@@ -42,7 +38,7 @@ export default function Map() {
       style: 'mapbox://styles/mapbox/streets-v11',
       // style: "mapbox://styles/mapbox/light-v10",
       center: [15.322222, -4.325],
-      zoom: 11,
+      zoom: 7,
     });
 
 
@@ -116,10 +112,8 @@ map.on('mousemove', function(e) {
   //   return <Loading/>;
   // }
   return (
-    <>
       <DivMap style={{ height: ""}}>
         <div className="map" ref={mapRef} />
       </DivMap>
-   </>
   );
 }

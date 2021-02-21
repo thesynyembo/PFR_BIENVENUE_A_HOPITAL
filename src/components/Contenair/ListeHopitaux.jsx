@@ -2,9 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react"
 import { Feed, Card, Grid, Button, Input } from 'semantic-ui-react'
 import styled from "styled-components"
-import logo from "../Img/ngaliema.jpg"
-import { Link } from "react-router-dom"
-import CustomScroll from 'react-customscroll';
+import { Link, useParams } from "react-router-dom"
+import CustomScroll from 'react-customscroll'
 import Loading from './loader'
 
 const Title = styled.p`
@@ -53,39 +52,30 @@ margin:20px 20px;
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
   
-// .five.wide.computer.five.wide.mobile.five.wide.tablet.column.DivBar :hover {
 
-//   transform: scale(1.1);
-// }
 .icone{
   color:red;
   }
-
-  // h4{
-  //   font-family: "Mont Bold";
-  //   font-size: 23px;
-  //   font-weight:300;
-  // }
 
 
   // scroll
 
   .react-customscroll-scrollbar {
-    background-color:red !important;
+    background-color:red!important;
   }
   .react-customscroll-scrollbar-area {
-    background-color: #049DD9 !important;
+    background-color: rgb(174, 174, 174) !important;
   }
   
 
   `;
 export default function MenuRight() {
-  const [listeHopital, setListeHopital] = useState([]);
-  const [recherche, setRecherche] = useState([]);
-  const [load, setLoad] = useState(false);
-  const [search, setSearch] = useState([]);
-  const [dataSearch, setDataSearch] = useState('');
-  const [searchTerm, setSearchTerm] = useState("");
+  const [listeHopital, setListeHopital] = useState([])
+  const [recherche, setRecherche] = useState([])
+  const [load, setLoad] = useState(false)
+  const [search, setSearch] = useState([])
+  const [dataSearch, setDataSearch] = useState('')
+  const [searchTerm, setSearchTerm] = useState("")
   const handleChange = event => {
     setSearchTerm(event.target.value);
   };
@@ -97,32 +87,35 @@ export default function MenuRight() {
       person.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
     );
 
+    let { id } = useParams();
+    const params = { id };
+    console.log(params.id);
+
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/Map`)
+      .get(`http://localhost:5000/Map/hopSpec/${params.id}?`)
       .then((res) => {
-        setListeHopital(res.data);
+        setListeHopital(res.data)
         // setRecherche(res.data);
         setLoad(true);
         // setSearch(res.data);
         console.log('je suis search',res.data)
       })
-      .catch((erreur) => console.log(erreur));
+      .catch((erreur) => console.log(erreur))
   }, []);
   
 
 const rechercheHopital=(e)=>{
   setDataSearch(e.target.value.toLowerCase());  
-  let marecherche = listeHopital.filter(hopital=> hopital.name.toLowerCase().includes(dataSearch.toLowerCase()));
-  let thisSearch = listeHopital.filter(searchHopital=>searchHopital.name.toLowerCase().includes(dataSearch.toLowerCase()));
-  setListeHopital(marecherche);
-  setRecherche(marecherche);
-  console.log('barre',marecherche);
+  let marecherche = listeHopital.filter(hopital=> hopital.name.toLowerCase().includes(dataSearch.toLowerCase()))
+  let thisSearch = listeHopital.filter(searchHopital=>searchHopital.name.toLowerCase().includes(dataSearch.toLowerCase()))
+  setListeHopital(marecherche)
+  setRecherche(marecherche)
+  console.log('barre',marecherche)
 }
 
 
   return (
-  <>
 
     <Div>
  
@@ -147,8 +140,8 @@ const rechercheHopital=(e)=>{
         <Card.Content>
           <Grid>
             <Grid.Column mobile={5} tablet={5} computer={5} className="DivBar">
-              <Feed.Extra images>          
-                <img src={logo} style={{height:"200px",width:"150%", objectFit:"cover"}} />          
+              <Feed.Extra images key={index}>          
+                <img src={e.image} style={{height:"200px",width:"150%", objectFit:"contain"}} />          
               </Feed.Extra>
             </Grid.Column>
             <Grid.Column mobile={11} tablet={11} computer={11}>
@@ -157,7 +150,7 @@ const rechercheHopital=(e)=>{
                   <Feed.Date key={index}>              
                     {e.adress}
                   </Feed.Date><br/>
-                  <Link to={"/DetailListe/" +e.id}>
+                  <Link to={"/DetailListe/" +e.id_hopital}>
                   <Button inverted color='red' className="ButtonIcon" >VOIR PLUS</Button>
                     {/* <Button inverted color='red' className="ButtonIcon" ><i className="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button> */}
                   </Link>
@@ -177,6 +170,5 @@ const rechercheHopital=(e)=>{
       
     </Div>
 
-  </>
   );
 }

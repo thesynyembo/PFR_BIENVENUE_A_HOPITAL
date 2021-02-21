@@ -68,7 +68,7 @@ export default function Map() {
       container: mapRef.current,
       style: "mapbox://styles/mapbox/light-v10",
       center: [15.322222, -4.325],
-      zoom: 11,
+      zoom: 12,
     });
     const customData = formatDataHopital(data);    
     function forwardGeocoder(query) {
@@ -146,7 +146,7 @@ map.on('mousemove', function(e) {
   }
   const feature = features[0];
   popup.setLngLat(feature.geometry.coordinates)
-  .setHTML("<div className='pop'> <strong><span>Hôpital </span>"+feature.properties.name+"</strong></div>")
+  .setHTML("<div className='pop'> <strong>"+feature.properties.name+"</strong></div>")
   .addTo(map);
 
   map.getCanvas().style.cursor = features.length ? 'pointer' : '';
