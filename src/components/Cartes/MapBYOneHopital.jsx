@@ -10,7 +10,7 @@ import {  useParams} from "react-router-dom";
 
 const DivMap = styled.div`
 .map{
-height:200px;
+height:250px;
 }
 `;
 
@@ -71,7 +71,7 @@ map.on('mousemove', function(e) {
   }
   const feature = features[0];
   popup.setLngLat(feature.geometry.coordinates)
-  .setHTML("<div class='pop'> <strong>"+feature.properties.name+"</strong></div>")
+  .setHTML("<div class='pop'> <strong>"+feature.properties.name+"</strong><br/><br/><strong>"+feature.properties.adress+"</strongtyle=></div>")
   .addTo(map);
 
   map.getCanvas().style.cursor = features.length ? 'pointer' : '';
@@ -107,12 +107,8 @@ map.on('mousemove', function(e) {
     };
   }
 
-
-  // if (load === false) {
-  //   return <Loading/>;
-  // }
   return (
-      <DivMap style={{ height: ""}}>
+      <DivMap>
         <div className="map" ref={mapRef} />
       </DivMap>
   );

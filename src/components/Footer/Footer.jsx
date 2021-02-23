@@ -1,10 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 import { Grid, Icon} from 'semantic-ui-react'
-import logo from '../Img/logoBAH2.png'
 
 const Div = styled.div`
-  background:#9D9D9C;
+  background-color:#A6A6A6 !important;
   height: 30%;
   // padding-bottom: 10%;
   color: white;

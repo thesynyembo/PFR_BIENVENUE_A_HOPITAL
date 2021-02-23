@@ -23,8 +23,6 @@ const Div = styled.div`
 	}
 	.title {
 		color: #d90718;
-		// background-color: #FBF6F6;
-		margin-left: -3rem;
 		padding-top: 7%;
 		padding-bottom: 6%;
 		text-align: center;
@@ -49,7 +47,6 @@ const Div = styled.div`
 		cursor: pointer;
 		position: absolute;
 		z-index: 3;
-		padding-left: 3rem;
 		margin-top: 4%;
 		font-size: 2em;
 		color: #d90718;
@@ -71,10 +68,11 @@ const Div = styled.div`
 		font-weight: 100;
 		font-style: italic;
 	}
-	.para {
+	.paragraphe {
 		color: #9d9d9c;
 		font-size: 15px;
 		font-weight: 100;
+		margin-left: 32px;
 	}
 	// scroll
 
@@ -98,41 +96,41 @@ export default function CardDetailHopital({ hopital, visible, changementDisplay 
 					<CustomScroll>
 						<Grid>
 							{/* title Hôpital */}
-							<Grid.Column mobile={11} tablet={11} computer={11}>
+							<Grid.Column mobile={13} tablet={13} computer={13}>
 								<p className="title">{hopital.name}</p>
 							</Grid.Column>
 
 							{/* button close */}
-							<Grid.Column mobile={5} tablet={5} computer={5}>
+						<Grid.Column mobile={3} tablet={3} computer={3}>
 								<div className="annuler" onClick={() => changementDisplay()}>
 									<i class="far fa-window-close" />
 								</div>
 							</Grid.Column>
 
 							{/* image */}
-							<Grid.Column mobile={16} tablet={6} computer={6}>
-								<Image src={logos} style={{ textAlign: 'center' }} />
+							<Grid.Column mobile={16} tablet={16} computer={16}>
+								<Image src={hopital.image} style={{ textAlign: 'center' ,width:"100%",height:"200px", objectFit:"cover"}} />
 							</Grid.Column>
 
 							{/* content cardDetail */}
-							<Grid.Column mobile={16} tablet={10} computer={10}>
-								<p className="para">
+							<Grid.Column mobile={16} tablet={16} computer={16}>
+								<p className="paragraphe">
 									<Icon name="map marker alternate" className="icone" />
 									<span className="icone">Adresse</span> : {hopital.adress}
 								</p>
-								<p className="para">
+								<p className="paragraphe">
 									<Icon name="phone" className="icone" />
 									<span className="icone">Téléphone</span> : {hopital.phone}
 								</p>
-								<p className="para">
+								<p className="paragraphe">
 									<Icon name="envelope" className="icone" />
 									<span className="icone">Gmail</span> : {hopital.email}
 								</p>
-								<p className="para">
+								<p className="paragraphe">
 									<Icon name="clock outline" className="icone" />
 									<span className="icone">Heure</span> : {hopital.heure_de_service}
 								</p>
-								<p className="para">
+								<p className="paragraphe">
 									<Icon name="info" className="icone" />
 									<span className="icone">Langue(s)</span> :{hopital.email}
 								</p>
@@ -141,11 +139,9 @@ export default function CardDetailHopital({ hopital, visible, changementDisplay 
 							{/* colonne spécialité */}
 							<Grid.Column mobile={16} tablet={16} computer={16}>
 								<p className="sousTitle">Spécialité</p>
-								<p className="para">
+								<p className="paragraphe">
 									<ul>
-										<li>{hopital.email}</li>
-										<li>{hopital.email}</li>
-										<li>{hopital.email}</li>
+										<li>{hopital.nom}</li>
 									</ul>
 								</p>
 							</Grid.Column>
@@ -153,7 +149,7 @@ export default function CardDetailHopital({ hopital, visible, changementDisplay 
 							{/* colone direction */}
 							<Grid.Column mobile={16} tablet={16} computer={16}>
 								<p className="sousTitle">Direction de l'hôpital</p>
-								<p className="para">
+								<p className="paragraphe">
 									<ol>
 										<li>
 											<span>Directeur</span> : {hopital.directeur}

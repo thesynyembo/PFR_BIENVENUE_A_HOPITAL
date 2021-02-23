@@ -11,6 +11,7 @@ export function formatHopital(hopital) {
         longitude: element.longitude,
         phone: element.phone,
         description: element.description,
+        images: element.images,
         directeur: element.directeur,
         president_surveillance: element.president_surveillance
       };

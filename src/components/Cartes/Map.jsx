@@ -12,7 +12,7 @@ import * as turf from '@turf/turf'
 const DivMap = styled.div`
   width: 100%;
   span{
-    color: red;
+    color:#D90718 ;
     text-align:center;
   }
   .distance-container {

@@ -29,7 +29,7 @@ margin:20px 20px;
     margin-left:10%;
   }
   h2{
-    color: red;
+    color: #D90718;
     font-weight:300;
   }
 
@@ -41,6 +41,7 @@ margin:20px 20px;
     margin-left:20px;
     color:black;
   }
+
   button.ui.red.inverted.button.ButtonIcon {
     font-weight: bold;
     text-transform: uppercase;
@@ -54,14 +55,15 @@ margin:20px 20px;
   
 
 .icone{
-  color:red;
+  color: #D90718;
+
   }
 
 
   // scroll
 
   .react-customscroll-scrollbar {
-    background-color:red!important;
+    background-color:#D90718!important;
   }
   .react-customscroll-scrollbar-area {
     background-color: rgb(174, 174, 174) !important;
@@ -93,7 +95,7 @@ export default function MenuRight() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/Map/hopSpec/${params.id}?`)
+      .get(`http://localhost:5000/Map`)
       .then((res) => {
         setListeHopital(res.data)
         // setRecherche(res.data);
@@ -126,7 +128,7 @@ const rechercheHopital=(e)=>{
                         <Grid.Column mobile={16} tablet={16} computer={16}>
                             <Title>Liste des hôpitaux</Title>
                           </Grid.Column>
-                          <Grid.Column mobile={16} tablet={16} computer={16}>
+                          <Grid.Column mobile={16} tablet={16} computer={10} style={{width:"93.5%",paddingLeft: "1.4rem"}}>
                           <Input type='text' placeholder='Rechercher un hôpital' fluid icon='search' value={searchTerm} onChange={handleChange}/>                            
                           </Grid.Column>
                         
@@ -145,16 +147,18 @@ const rechercheHopital=(e)=>{
               </Feed.Extra>
             </Grid.Column>
             <Grid.Column mobile={11} tablet={11} computer={11}>
-              <TitleTwo key={index} style={{marginLeft:'30%'}}>Hôpital {e.name}</TitleTwo>
-                <TitleThree style={{marginLeft:'30%'}}>
-                  <Feed.Date key={index}>              
+              <TitleTwo key={index} style={{marginLeft:'30%'}}>{e.name}</TitleTwo>
+              <TitleThree style={{marginLeft:'30%'}}>
+                <Feed.Date key={index}>              
                     {e.adress}
-                  </Feed.Date><br/>
-                  <Link to={"/DetailListe/" +e.id_hopital}>
+                </Feed.Date><br/>
+                <Feed.Date key={index} style={{color:'red'}}>              
+                    {e.heure_de_service}
+                </Feed.Date><br/>
+                <Link to={"/DetailListe/" +e.id}>
                   <Button inverted color='red' className="ButtonIcon" >VOIR PLUS</Button>
-                    {/* <Button inverted color='red' className="ButtonIcon" ><i className="fas fa-plus-circle" style={{fontSize:"1.5em"}}/></Button> */}
-                  </Link>
-                </TitleThree>
+                </Link>
+            </TitleThree>
             </Grid.Column>
           </Grid>
         </Card.Content>
