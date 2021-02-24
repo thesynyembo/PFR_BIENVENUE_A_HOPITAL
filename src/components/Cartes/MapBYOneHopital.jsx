@@ -4,7 +4,6 @@ import styled from "styled-components"
 import React, { useState, useEffect } from "react"
 import {formatHopital} from "../../services/api/helper"
 import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css"
-
 import {  useParams} from "react-router-dom";
 
 
@@ -20,10 +19,13 @@ export default function Map() {
   mapboxgl.accessToken =
     "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA";
   const [mapRef, setMapRef] = useState(React.createRef());
+
   let { id } = useParams();
   const params = { id };
   console.log(params.id);
+
   useEffect(() => {
+    
     axios
       .get(`http://localhost:5000/Map/${params.id}`)
       .then((res) => {

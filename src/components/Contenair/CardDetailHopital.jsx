@@ -1,8 +1,9 @@
-import React from 'react';
-import { Grid, Icon, Image } from 'semantic-ui-react';
-import styled from 'styled-components';
-import logos from '../Img/ngaliema.jpg';
-import CustomScroll from 'react-customscroll';
+import axios from "axios";
+import React, { useEffect, useState } from "react"
+import { Grid, Icon, Image } from 'semantic-ui-react'
+import styled from 'styled-components'
+import CustomScroll from 'react-customscroll'
+import { useParams} from "react-router-dom"
 
 const Div = styled.div`
 	padding-left: 20%;
@@ -89,6 +90,23 @@ const DivB = styled.p`
 `;
 
 export default function CardDetailHopital({ hopital, visible, changementDisplay }) {
+
+  const [hopitalSep, setHopitalSep] = useState([]);
+
+  let { id } = useParams();
+  const params = { id };
+  console.log(params.id);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/Map/Specialites/${params.id}?`)
+      .then((res) => {
+        setHopitalSep(res.data);
+      })
+      .catch((erreur) => console.log(erreur));
+  }, []);
+
+
 	return (
 		<Div>
 			{visible ? (
@@ -101,7 +119,7 @@ export default function CardDetailHopital({ hopital, visible, changementDisplay 
 							</Grid.Column>
 
 							{/* button close */}
-						<Grid.Column mobile={3} tablet={3} computer={3}>
+							<Grid.Column mobile={3} tablet={3} computer={3}>
 								<div className="annuler" onClick={() => changementDisplay()}>
 									<i class="far fa-window-close" />
 								</div>
@@ -109,7 +127,7 @@ export default function CardDetailHopital({ hopital, visible, changementDisplay 
 
 							{/* image */}
 							<Grid.Column mobile={16} tablet={16} computer={16}>
-								<Image src={hopital.image} style={{ textAlign: 'center' ,width:"100%",height:"200px", objectFit:"cover"}} />
+								<Image src={hopital.image} style={{ textAlign: 'center' ,width:"100%",height:"200px", objectFit:"contain"}} />
 							</Grid.Column>
 
 							{/* content cardDetail */}
@@ -140,9 +158,15 @@ export default function CardDetailHopital({ hopital, visible, changementDisplay 
 							<Grid.Column mobile={16} tablet={16} computer={16}>
 								<p className="sousTitle">Spécialité</p>
 								<p className="paragraphe">
-									<ul>
-										<li>{hopital.nom}</li>
-									</ul>
+								{ hopitalSep.specialite == undefined 
+              ? 
+              null
+              :
+               hopitalSep.specialite.map((e)=>
+                    <ul className='content'>
+                      <li>{e.nom_specialite}fyy</li>
+                    </ul>
+                    )}
 								</p>
 							</Grid.Column>
 

@@ -47,7 +47,7 @@ export default function Map() {
   });
   const [dataHopital, setDataHopital] = useState([]);
   const [load, setLoad] = useState(false);  
-  const [distance, setDisatnce] = useState([]);
+  const [distance,  setDistance] = useState([]);
  
 
   useEffect(() => {
@@ -56,9 +56,7 @@ export default function Map() {
       .then((res) => {
         setLoad(true);
         setDataHopital(res.data);
-        console.log(res.data);
         createMap(mapRef, formatHopital(res.data));
-        // createMap(mapref)
       })
       .catch((erreur) => console.log(erreur));
   }, []);
@@ -171,9 +169,8 @@ map.on('mousemove', function(e) {
       map.getCanvas().style.cursor = "";
     });
     
-   // mapExemple
+   // map Turf
 
-    // var distanceContainer = document.getElementById('distance');
 
     // GeoJSON object to hold our measurement features
     // Objet GeoJSON pour contenir nos fonctionnalités de mesure
@@ -225,7 +222,6 @@ map.on('mousemove', function(e) {
       });
 
       map.on('click', function (e) {
-        console.log("thythy",e)
           var features = map.queryRenderedFeatures(e.point, {
               layers: ['measure-points']
           });
@@ -236,10 +232,6 @@ map.on('mousemove', function(e) {
           // Supprime la chaîne de lignes du groupe
           // Nous pouvons donc le redessiner en fonction de la collection de points
           if (geojson.features.length > 1) geojson.features.pop();
-
-          // Clear the Distance container to populate it with a new value
-          // Effacez le conteneur Distance pour le remplir avec une nouvelle valeur
-          // document.getElementById('distance').innerHTML('');
 
           // If a feature was clicked, remove it from the map
           // Si vous avez cliqué sur une entité, supprimez-la de la carte
@@ -275,7 +267,7 @@ map.on('mousemove', function(e) {
               // Populate the distanceContainer with total distance
               // Remplissez le conteneur de distance avec la distance totale
               var value = document.createElement('pre');
-              setDisatnce(turf.length(linestring).toLocaleString())
+               setDistance(turf.length(linestring).toLocaleString())
               
               value.textContent =
                   'Total distance: ' + turf.length(linestring).toLocaleString() +'km';
@@ -338,8 +330,11 @@ map.on('mousemove', function(e) {
                   ) : (
                     <>
                     <div id="distance" className="distance-container"><strong>Total distance à parcourir :  <span>{distance} </span>km </strong></div>
+
                     <div className="map-container" ref={mapRef} />  
-                    {displayDetailHopital ? <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital}  changementDisplay={changementDisplay} /> : ""}</>
+
+                    {displayDetailHopital ? 
+                    <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital}  changementDisplay={changementDisplay} /> : ""}</>
 
                   )} 
                   </DivMap>

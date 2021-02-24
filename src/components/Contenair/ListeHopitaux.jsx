@@ -73,10 +73,7 @@ margin:20px 20px;
   `;
 export default function MenuRight() {
   const [listeHopital, setListeHopital] = useState([])
-  const [recherche, setRecherche] = useState([])
   const [load, setLoad] = useState(false)
-  const [search, setSearch] = useState([])
-  const [dataSearch, setDataSearch] = useState('')
   const [searchTerm, setSearchTerm] = useState("")
   const handleChange = event => {
     setSearchTerm(event.target.value);
@@ -98,23 +95,11 @@ export default function MenuRight() {
       .get(`http://localhost:5000/Map`)
       .then((res) => {
         setListeHopital(res.data)
-        // setRecherche(res.data);
         setLoad(true);
-        // setSearch(res.data);
         console.log('je suis search',res.data)
       })
       .catch((erreur) => console.log(erreur))
   }, []);
-  
-
-const rechercheHopital=(e)=>{
-  setDataSearch(e.target.value.toLowerCase());  
-  let marecherche = listeHopital.filter(hopital=> hopital.name.toLowerCase().includes(dataSearch.toLowerCase()))
-  let thisSearch = listeHopital.filter(searchHopital=>searchHopital.name.toLowerCase().includes(dataSearch.toLowerCase()))
-  setListeHopital(marecherche)
-  setRecherche(marecherche)
-  console.log('barre',marecherche)
-}
 
 
   return (
