@@ -334,7 +334,7 @@ map.on('mousemove', function(e) {
                     <div className="map-container" ref={mapRef} />  
 
                     {displayDetailHopital ? 
-                    <CardDetailHopital hopital= {selectHopital} specialite= {selectHopital} visible={displayDetailHopital}  changementDisplay={changementDisplay} /> : ""}</>
+                    <CardDetailHopital hopital= {selectHopital} visible={displayDetailHopital}  changementDisplay={changementDisplay} /> : ""}</>
 
                   )} 
                   </DivMap>

@@ -24,7 +24,7 @@ margin-right:10%;
   }
   .title{
     background-color:#A6A6A6;
-    color:#0511F2;
+    color:#fff;
     width:100%;
     height:20%;  
     font-size: 24px;
@@ -110,10 +110,10 @@ return (
               <Icon name='clock outline' className="icone"/>
                 <span className='NewsContent'>Heure : </span>{hopital.heure_de_service}
             </p>
-            <p className='content'>
+            {/* <p className='content'>
               <Icon name='info' className="icone"/>
                 <span className='NewsContent'>Langue(s) : </span>{hopital.email}
-            </p>
+            </p> */}
           </Grid.Column>
           {/* spécialité */}
 
